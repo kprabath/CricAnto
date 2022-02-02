@@ -26,12 +26,15 @@ const Manage = () => {
     </View>
   );
   return (
+    <>
+
     <View style={styles.container}>
       {card()}
       {card()}
       {card()}
       {card()}
     </View>
+    </>
   );
 };
 

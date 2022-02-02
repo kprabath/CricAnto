@@ -4,10 +4,13 @@ import {StyleSheet, View} from 'react-native';
 import CricantoText from '../components/cricantoText';
 import {getScaledNumber} from '../library/utils';
 import Colors from '../res/colors';
+import CricantoHeader from '../components/cricantoHeader';
 import {CricantoTextTypes} from '../enums';
 
 const Contribution = () => {
   return (
+    <>
+    <CricantoHeader headerTitle="Contribution"/>
     <View style={styles.container}>
       <View style={styles.card1}>
         <CricantoText
@@ -38,6 +41,7 @@ const Contribution = () => {
         />
       </View>
     </View>
+    </>
   );
 };
 

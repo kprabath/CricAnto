@@ -6,6 +6,8 @@ import {getScaledNumber} from '../library/utils';
 import Colors from '../res/colors';
 import {CricantoTextTypes} from '../enums';
 
+import CricantoHeader from '../components/cricantoHeader';
+
 import GoldLogo from '../res/images/Gold.svg';
 import SilverLogo from '../res/images/Silver.svg';
 import BronzeLogo from '../res/images/Bronze.svg';
@@ -13,35 +15,38 @@ import DropdownIcon from '../res/images/DropdownIcon.svg';
 
 const Contribution = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.card1}>
-        <GoldLogo />
-        <CricantoText
-          label="Gold"
-          style={styles.cardText}
-          type={CricantoTextTypes.H2}
-        />
-        <DropdownIcon />
+    <>
+      <CricantoHeader headerTitle="Membership " />
+      <View style={styles.container}>
+        <View style={styles.card1}>
+          <GoldLogo />
+          <CricantoText
+            label="Gold"
+            style={styles.cardText}
+            type={CricantoTextTypes.H2}
+          />
+          <DropdownIcon />
+        </View>
+        <View style={styles.card2}>
+          <SilverLogo />
+          <CricantoText
+            label="Silver"
+            style={styles.cardText}
+            type={CricantoTextTypes.H2}
+          />
+          <DropdownIcon />
+        </View>
+        <View style={styles.card3}>
+          <BronzeLogo />
+          <CricantoText
+            label="Bronz"
+            style={styles.cardText}
+            type={CricantoTextTypes.H2}
+          />
+          <DropdownIcon />
+        </View>
       </View>
-      <View style={styles.card2}>
-        <SilverLogo />
-        <CricantoText
-          label="Silver"
-          style={styles.cardText}
-          type={CricantoTextTypes.H2}
-        />
-        <DropdownIcon />
-      </View>
-      <View style={styles.card3}>
-        <BronzeLogo />
-        <CricantoText
-          label="Bronz"
-          style={styles.cardText}
-          type={CricantoTextTypes.H2}
-        />
-        <DropdownIcon />
-      </View>
-    </View>
+    </>
   );
 };
 

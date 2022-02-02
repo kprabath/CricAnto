@@ -14,6 +14,7 @@ import TicketsScreen from '../screens/tickets.screen';
 import ContributionScreen from '../screens/contributuon.screen';
 import MembershipScreen from '../screens/membership.screen';
 import ManageScreen from '../screens/manage.screen';
+import ShopScreen from '../screens/shop.screen';
 
 import {
   SIGN_UP_SCREEN,
@@ -25,6 +26,7 @@ import {
   PROFILE_SCREEN,
   TICKETS_SCREEN,
   MEMBERSHIP_SCREEN,
+  SHOP_SCREEN,
 } from '../common/constants';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomeSideMenu from './customeSideMenu';
@@ -90,13 +92,13 @@ const DrawerNavigator = props => {
       screenOptions={{
         headerStyle: {backgroundColor: Colors.white},
         // headerTitle: 'Profile',
-        //\\headerShown: false,
+        headerShown: false,
       }}
       drawerContent={props => <CustomeSideMenu {...props} />}>
       <Drawer.Screen
-        options={{
-          headerTitle: 'Profile',
-        }}
+        // options={{
+        //   headerTitle: 'Profile',
+        // }}
         name={AUTH_ROUTES}
         component={TabNavigator}
       />
@@ -150,14 +152,15 @@ const TabNavigator = props => {
           tabBarIcon: () => <TabIcon3 />,
         }}
         name="TesTab3"
-        component={UserTabRoutes}
+        component={ShopScreen}
       />
       <Tab.Screen
         options={{
           tabBarIcon: () => <TabIcon4 />,
+          headerTitle: 'hh',
         }}
         name="TestTab4"
-        component={UserTabRoutes}
+        component={ShopScreen}
       />
       <Tab.Screen
         options={{

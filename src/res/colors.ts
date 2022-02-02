@@ -12,6 +12,7 @@ const colors = {
   secondary: '#E5E5E5',
   black: '#000000',
   cricantoBlack: '#1D1617',
+  cricantoLightBlack:'#3E4958',
   cricantoPurple: '#BF55EC',
   cricantoLightBlue: '#92A3FD',
   linearColor1: '#9DCEFF',
