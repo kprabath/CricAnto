@@ -3,9 +3,7 @@ import {Link} from '@react-navigation/native';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {CricantoTextTypes} from '../enums';
-import CricantoText from '../components/cricantoText';
-import CricantoInput from '../components/cricantoInput';
-import CricantoButton from '../components/cricantoButton';
+import {CricantoText, CricantoInput, CricantoButton} from '../components';
 import {getScaledNumber} from '../library/utils';
 import colors from '../res/colors';
 

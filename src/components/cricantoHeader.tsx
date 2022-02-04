@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactChild} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {CricantoTextTypes} from '../enums';
 import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
@@ -7,33 +7,49 @@ import {getScaledNumber} from '../library/utils';
 import DrawerIcon from '../res/images/DrawerIcon.svg';
 import CricantoText from './cricantoText';
 
-const CricantoHeader = ({headerTitle, style, RightIcon, onPress}: IProps) => {
+const CricantoHeader = ({
+  headerTitle,
+  style,
+  RightIcon,
+  onPress,
+  children,
+}: IProps) => {
   const navigation = useNavigation();
   return (
-    <View style={[styles.container, style]}>
-      <TouchableOpacity
-        style={styles.headerBtn}
-        onPress={() => navigation?.openDrawer()}>
-        <DrawerIcon />
-      </TouchableOpacity>
-      <CricantoText label={headerTitle} style={styles.titleStyle} type={CricantoTextTypes.H3} />
-      <TouchableOpacity style={styles.headerBtn} onPress={onPress}>
-        {RightIcon && <RightIcon style={styles.headerBtn} />}
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={[styles.headerContainer, style]}>
+        <TouchableOpacity
+          style={styles.headerBtn}
+          onPress={() => navigation?.openDrawer()}>
+          <DrawerIcon />
+        </TouchableOpacity>
+        <CricantoText
+          label={headerTitle}
+          style={styles.titleStyle}
+          type={CricantoTextTypes.H3}
+        />
+        <TouchableOpacity style={styles.headerBtn} onPress={onPress}>
+          {RightIcon && <RightIcon style={styles.headerBtn} />}
+        </TouchableOpacity>
+      </View>
+      {children}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  headerContainer: {
     flexDirection: 'row',
     paddingHorizontal: getScaledNumber(20),
     width: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  titleStyle:{
-    fontWeight:'500'
+  titleStyle: {
+    fontWeight: '500',
   },
   headerBtn: {
     width: getScaledNumber(30),
@@ -53,6 +69,7 @@ export interface IProps {
   style?: StyleProp<TextStyle>;
   headerTitle?: string;
   onPress?: Function;
+  children?: any;
 }
 
 export default CricantoHeader;

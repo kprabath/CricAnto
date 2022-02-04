@@ -1,11 +1,10 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {CricantoTextTypes} from '../enums';
-import CricantoText from '../components/cricantoText';
 import {getScaledNumber} from '../library/utils';
 import {TICKETS_SCREEN} from '../common/constants';
-import CricantoHeader from '../components/cricantoHeader';
+import {CricantoHeader, CricantoText} from '../components';
 
 import UserDP from '../res/images/UserDP.svg';
 import UserProfile from '../res/images/UserProfile.svg';
@@ -19,8 +18,7 @@ import Colors from '../res/colors';
 const Profile = () => {
   const navigation = useNavigation();
   return (
-    <>
-      <CricantoHeader headerTitle="Profile" />
+    <CricantoHeader headerTitle="Profile">
       <View style={styles.container}>
         <View style={styles.userContent}>
           <UserDP />
@@ -167,7 +165,7 @@ const Profile = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </>
+    </CricantoHeader>
   );
 };
 

@@ -1,15 +1,15 @@
 import React from 'react';
-
+import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, View} from 'react-native';
 import {CricantoTextTypes} from '../enums';
-import CricantoText from '../components/cricantoText';
-import CricantoButton from '../components/cricantoButton';
+import {CricantoText, CricantoButton} from '../components';
 import {getScaledNumber} from '../library/utils';
 import {AUTH_ROUTES} from '../common/constants';
 
 import WelcomeLogo from '../res/images/Welcome.svg';
 
-const Welcome = ({navigation}) => {
+const Welcome = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>

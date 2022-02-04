@@ -4,44 +4,43 @@ import {StyleSheet, View} from 'react-native';
 import CricantoText from '../components/cricantoText';
 import {getScaledNumber} from '../library/utils';
 import Colors from '../res/colors';
-import CricantoHeader from '../components/cricantoHeader';
+import {CricantoHeader} from '../components';
 import {CricantoTextTypes} from '../enums';
 
 const Contribution = () => {
   return (
-    <>
-    <CricantoHeader headerTitle="Contribution"/>
-    <View style={styles.container}>
-      <View style={styles.card1}>
-        <CricantoText
-          label="Rs 50,000"
-          style={styles.cardText}
-          type={CricantoTextTypes.H2}
-        />
+    <CricantoHeader headerTitle="Contribution">
+      <View style={styles.container}>
+        <View style={styles.card1}>
+          <CricantoText
+            label="Rs 50,000"
+            style={styles.cardText}
+            type={CricantoTextTypes.H2}
+          />
+        </View>
+        <View style={styles.card2}>
+          <CricantoText
+            label="Rs 50,000"
+            style={styles.cardText}
+            type={CricantoTextTypes.H2}
+          />
+        </View>
+        <View style={styles.card3}>
+          <CricantoText
+            label="Rs 50,000"
+            style={styles.cardText}
+            type={CricantoTextTypes.H2}
+          />
+        </View>
+        <View style={styles.card4}>
+          <CricantoText
+            label="Contribution"
+            style={styles.contributionText}
+            type={CricantoTextTypes.H2}
+          />
+        </View>
       </View>
-      <View style={styles.card2}>
-        <CricantoText
-          label="Rs 50,000"
-          style={styles.cardText}
-          type={CricantoTextTypes.H2}
-        />
-      </View>
-      <View style={styles.card3}>
-        <CricantoText
-          label="Rs 50,000"
-          style={styles.cardText}
-          type={CricantoTextTypes.H2}
-        />
-      </View>
-      <View style={styles.card4}>
-        <CricantoText
-          label="Contribution"
-          style={styles.contributionText}
-          type={CricantoTextTypes.H2}
-        />
-      </View>
-    </View>
-    </>
+    </CricantoHeader>
   );
 };
 

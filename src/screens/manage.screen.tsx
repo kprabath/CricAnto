@@ -1,15 +1,10 @@
 import React from 'react';
 
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import CricantoText from '../components/cricantoText';
+import {CricantoText} from '../components';
 import {getScaledNumber} from '../library/utils';
 import Colors from '../res/colors';
 import {CricantoTextTypes} from '../enums';
-
-import GoldLogo from '../res/images/Gold.svg';
-import SilverLogo from '../res/images/Silver.svg';
-import BronzeLogo from '../res/images/Bronze.svg';
-import DropdownIcon from '../res/images/DropdownIcon.svg';
 
 const Manage = () => {
   const card = () => (
@@ -27,13 +22,12 @@ const Manage = () => {
   );
   return (
     <>
-
-    <View style={styles.container}>
-      {card()}
-      {card()}
-      {card()}
-      {card()}
-    </View>
+      <View style={styles.container}>
+        {card()}
+        {card()}
+        {card()}
+        {card()}
+      </View>
     </>
   );
 };

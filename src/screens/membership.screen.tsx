@@ -1,12 +1,11 @@
 import React from 'react';
 
 import {StyleSheet, View} from 'react-native';
-import CricantoText from '../components/cricantoText';
 import {getScaledNumber} from '../library/utils';
 import Colors from '../res/colors';
 import {CricantoTextTypes} from '../enums';
 
-import CricantoHeader from '../components/cricantoHeader';
+import {CricantoHeader, CricantoText} from '../components';
 
 import GoldLogo from '../res/images/Gold.svg';
 import SilverLogo from '../res/images/Silver.svg';
@@ -15,8 +14,7 @@ import DropdownIcon from '../res/images/DropdownIcon.svg';
 
 const Contribution = () => {
   return (
-    <>
-      <CricantoHeader headerTitle="Membership " />
+    <CricantoHeader headerTitle="Membership ">
       <View style={styles.container}>
         <View style={styles.card1}>
           <GoldLogo />
@@ -46,7 +44,7 @@ const Contribution = () => {
           <DropdownIcon />
         </View>
       </View>
-    </>
+    </CricantoHeader>
   );
 };
 

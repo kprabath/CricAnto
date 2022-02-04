@@ -1,13 +1,18 @@
 import React from 'react';
 
-import {StyleSheet, Image, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {getScaledNumber} from '../library/utils';
 import Colors from '../res/colors';
 import {CricantoTextTypes} from '../enums';
 
-import CricantoHeader from '../components/cricantoHeader';
-import CricantoInput from '../components/cricantoInput';
-import CricantoText from '../components/cricantoText';
+import {CricantoHeader, CricantoInput, CricantoText} from '../components';
+
 import BackgroundImage from '../res/images/ShopBackground.svg';
 import SampleImage from '../res/images/SampleImage1.jpeg';
 import Shoe from '../res/images/Shoe.svg';
@@ -15,6 +20,22 @@ import Bat from '../res/images/Bat.svg';
 import Discount from '../res/images/Discount.svg';
 import Message from '../res/images/Message.svg';
 import Cart from '../res/images/Cart.svg';
+import SampleProduct from '../res/images/SampleProduct.svg';
+
+const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'First Item',
+  },
+  {
+    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Second Item',
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    title: 'Third Item',
+  },
+];
 
 const Shop = () => {
   const topSlider = () => (
@@ -33,11 +54,24 @@ const Shop = () => {
       </View>
     </View>
   );
+
+  const newProducts = () => (
+    <View style={styles.productTileContainer}>
+      <View style={styles.productTileImageContent}>
+        <SampleProduct />
+      </View>
+      <CricantoText label="GM – NOIR 808" type={CricantoTextTypes.H4} />
+      <CricantoText
+        label="Rs31000.00"
+        type={CricantoTextTypes.H4}
+        style={styles.price}
+      />
+    </View>
+  );
   return (
-    <>
+    <CricantoHeader RightIcon={Cart} style={styles.headerStyle}>
       <BackgroundImage style={styles.backgroundImage} />
 
-      <CricantoHeader RightIcon={Cart} style={styles.headerStyle} />
       <View style={styles.container}>
         <CricantoInput
           style={styles.searchInput}
@@ -46,21 +80,56 @@ const Shop = () => {
         />
         {topSlider()}
         <View style={styles.itemContainer}>
-          <View style={styles.commonItem}>
-            <Bat />
+          <View style={styles.itemContent}>
+            <View style={styles.commonItem}>
+              <Bat />
+            </View>
+            <CricantoText label="Bats" />
           </View>
-          <View style={styles.commonItem}>
-            <Shoe />
+          <View style={styles.itemContent}>
+            <View style={styles.commonItem}>
+              <Shoe />
+            </View>
+            <CricantoText label="Boots" />
           </View>
-          <View style={styles.commonItem}>
-            <Bat />
+          <View style={styles.itemContent}>
+            <View style={styles.commonItem}>
+              <Bat />
+            </View>
+            <CricantoText label="Bags" />
           </View>
-          <View style={styles.commonItem}>
-            <Discount />
+          <View style={styles.itemContent}>
+            <View style={styles.commonItem}>
+              <Discount />
+            </View>
+            <CricantoText label="Disconts" />
           </View>
         </View>
       </View>
-    </>
+      <View style={styles.newProductsContainer}>
+        <View style={styles.newProductsHeader}>
+          <CricantoText
+            label="New Products"
+            type={CricantoTextTypes.BODY_SMALL}
+            style={styles.newProductsText}
+          />
+          <TouchableOpacity style={styles.viewBtn}>
+            <CricantoText
+              label="view all"
+              type={CricantoTextTypes.H4}
+              style={styles.viewText}
+            />
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          data={DATA}
+          horizontal
+          renderItem={newProducts}
+          keyExtractor={item => item.id}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+    </CricantoHeader>
   );
 };
 
@@ -71,6 +140,63 @@ const styles = StyleSheet.create({
     marginHorizontal: getScaledNumber(30),
     marginVertical: getScaledNumber(20),
     justifyContent: 'space-evenly',
+  },
+  price: {
+    fontWeight: '600',
+    marginTop: getScaledNumber(10),
+  },
+  productTileImageContent: {
+    borderRadius: getScaledNumber(10),
+    borderWidth: 1,
+    borderColor: Colors.lightSilver,
+    height: getScaledNumber(135),
+    width: getScaledNumber(125),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: getScaledNumber(15),
+  },
+  productTileContainer: {
+    backgroundColor: Colors.white,
+    borderRadius: getScaledNumber(16),
+    flexDirection: 'column',
+    padding: getScaledNumber(10),
+    width: getScaledNumber(140),
+    height: getScaledNumber(233),
+    alignItems: 'center',
+    marginRight: getScaledNumber(15),
+  },
+  newProductsText: {
+    fontWeight: '600',
+    color: Colors.cricantoLightBlack,
+  },
+  viewBtn: {
+    backgroundColor: Colors.cricantoLightBlue,
+    paddingVertical: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 7,
+    width: getScaledNumber(70),
+  },
+  viewText: {
+    color: Colors.white,
+  },
+  newProductsHeader: {
+    flexDirection: 'row',
+    marginHorizontal: getScaledNumber(30),
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: getScaledNumber(20),
+  },
+  newProductsContainer: {
+    backgroundColor: Colors.cricantoLightGray,
+    flexDirection: 'column',
+    flex: 1,
+    paddingVertical: getScaledNumber(20),
+    paddingHorizontal: getScaledNumber(10),
+  },
+  itemContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   itemContainer: {
     flexDirection: 'row',
@@ -83,8 +209,9 @@ const styles = StyleSheet.create({
     height: getScaledNumber(55),
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.cricantoLightBlue,
-    marginVertical: getScaledNumber(20),
+    backgroundColor: Colors.cricantoLightPurple,
+    marginTop: getScaledNumber(20),
+    marginBottom: getScaledNumber(10),
   },
   buyBtnText: {
     fontWeight: '500',
@@ -106,11 +233,13 @@ const styles = StyleSheet.create({
   },
   sliderActionText: {
     fontWeight: '500',
+    color: Colors.cricantoLightBlack,
     marginTop: getScaledNumber(5),
   },
   sliderImage: {
     width: getScaledNumber(160),
     height: getScaledNumber(100),
+    borderRadius: getScaledNumber(10),
   },
   topSliderContainer: {
     backgroundColor: Colors.lightSilver,
@@ -126,14 +255,12 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     position: 'absolute',
+    zIndex: 2,
   },
   backgroundImage: {
     position: 'absolute',
     top: -50,
     left: 7,
-    // left: 0,
-    // right: 0,
-    // bottom: 0,
   },
 });
 
