@@ -31,52 +31,52 @@ const CricantoText = ({label, type, style}: IProps) => {
 const styles = StyleSheet.create({
   display: {
     fontSize: getScaledNumber(40),
-    color: colors.black,
+    color: colors.cricantoLightBlack,
   },
   headerOne: {
     fontSize: getScaledNumber(28),
-    color: colors.black,
+    color: colors.cricantoLightBlack,
   },
   headerTwo: {
     fontSize: getScaledNumber(24),
-    color: colors.black,
+    color: colors.cricantoLightBlack,
   },
   headerThree: {
     fontSize: getScaledNumber(20),
-    color: colors.cricantoBlack,
+    color: colors.cricantoLightBlack,
   },
   headerFour: {
     fontSize: getScaledNumber(14),
-    color: colors.black,
+    color: colors.cricantoLightBlack,
   },
   custom: {
     fontSize: getScaledNumber(16),
-    color: colors.black,
+    color: colors.cricantoLightBlack,
   },
   subtitle: {
     fontSize: getScaledNumber(18),
-    color: colors.black,
+    color: colors.cricantoLightBlack,
   },
   bodySmall: {
     fontSize: getScaledNumber(16),
-    color: colors.cricantoBlack,
+    color: colors.cricantoLightBlack,
     weight: '400',
   },
   eyebrowThin: {
     fontSize: getScaledNumber(12),
-    color: colors.black,
+    color: colors.cricantoLightBlack,
   },
   eyebrow: {
     fontSize: getScaledNumber(12),
-    color: colors.black,
+    color: colors.cricantoLightBlack,
   },
   buttonLbl: {
     fontSize: getScaledNumber(12),
-    color: colors.black,
+    color: colors.cricantoLightBlack,
   },
   hint: {
     fontSize: getScaledNumber(12),
-    color: colors.black,
+    color: colors.cricantoLightBlack,
   },
   error: {
     fontSize: getScaledNumber(12),
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
   tiny: {
     fontSize: getScaledNumber(10),
-    color: colors.black,
+    color: colors.cricantoLightBlack,
   },
 });
 

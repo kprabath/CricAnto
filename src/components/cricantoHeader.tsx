@@ -5,6 +5,7 @@ import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 import colors from '../res/colors';
 import {getScaledNumber} from '../library/utils';
 import DrawerIcon from '../res/images/DrawerIcon.svg';
+import LeftArrow from '../res/images/LeftArrow.svg';
 import CricantoText from './cricantoText';
 
 const CricantoHeader = ({
@@ -12,6 +13,9 @@ const CricantoHeader = ({
   style,
   RightIcon,
   onPress,
+  containerStyle,
+  backKey,
+  rightIconAction,
   children,
 }: IProps) => {
   const navigation = useNavigation();
@@ -20,19 +24,23 @@ const CricantoHeader = ({
       <View style={[styles.headerContainer, style]}>
         <TouchableOpacity
           style={styles.headerBtn}
-          onPress={() => navigation?.openDrawer()}>
-          <DrawerIcon />
+          onPress={
+            backKey
+              ? () => navigation?.goBack()
+              : () => navigation?.openDrawer()
+          }>
+          {backKey ? <LeftArrow /> : <DrawerIcon />}
         </TouchableOpacity>
         <CricantoText
           label={headerTitle}
           style={styles.titleStyle}
           type={CricantoTextTypes.H3}
         />
-        <TouchableOpacity style={styles.headerBtn} onPress={onPress}>
+        <TouchableOpacity style={styles.headerBtn} onPress={rightIconAction}>
           {RightIcon && <RightIcon style={styles.headerBtn} />}
         </TouchableOpacity>
       </View>
-      {children}
+      <View style={[styles.container, containerStyle]}>{children}</View>
     </View>
   );
 };
@@ -67,9 +75,12 @@ const styles = StyleSheet.create({
 export interface IProps {
   RightIcon?: Image;
   style?: StyleProp<TextStyle>;
+  containerStyle?: StyleProp<TextStyle>;
   headerTitle?: string;
+  backKey?: boolean;
   onPress?: Function;
   children?: any;
+  rightIconAction?: any;
 }
 
 export default CricantoHeader;

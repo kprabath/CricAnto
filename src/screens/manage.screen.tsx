@@ -1,12 +1,24 @@
 import React from 'react';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {CricantoText} from '../components';
+import {CricantoText, CricantoHeader} from '../components';
 import {getScaledNumber} from '../library/utils';
 import Colors from '../res/colors';
 import {CricantoTextTypes} from '../enums';
 
+const TopTab = createMaterialTopTabNavigator();
+
 const Manage = () => {
+  const ManageRoutes = () => {
+    return (
+      <TopTab.Navigator>
+        <TopTab.Screen name="Pending" component={active} />
+        <TopTab.Screen name="Active" component={active} />
+        <TopTab.Screen name="Deleted" component={active} />
+      </TopTab.Navigator>
+    );
+  };
   const card = () => (
     <View style={styles.actionCard}>
       <View style={styles.sampleBox} />
@@ -20,15 +32,18 @@ const Manage = () => {
       </View>
     </View>
   );
-  return (
+
+  const active = () => (
     <>
-      <View style={styles.container}>
-        {card()}
-        {card()}
-        {card()}
-        {card()}
-      </View>
+      {card()}
+      {card()}
+      {card()}
     </>
+  );
+  return (
+    <CricantoHeader headerTitle="Manage" backKey>
+      {ManageRoutes()}
+    </CricantoHeader>
   );
 };
 
@@ -58,6 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#92A3FD',
     borderRadius: 11,
     padding: 10,
+    marginTop: getScaledNumber(5),
   },
   actionCard: {
     height: getScaledNumber(110),
@@ -66,7 +82,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     borderBottomWidth: 2,
-    paddingBottom: getScaledNumber(20),
+    paddingVertical: getScaledNumber(20),
+    paddingHorizontal: getScaledNumber(20),
     borderBottomColor: Colors.lightGray,
   },
 

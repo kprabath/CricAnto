@@ -3,7 +3,6 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 import Colors from '../res/colors';
 import SignUpScreen from '../screens/signUp.screen';
@@ -11,10 +10,11 @@ import LoginScreen from '../screens/login.screen';
 import WelcomeScreen from '../screens/welcome.screen';
 import ProfleScreen from '../screens/profile.screen';
 import TicketsScreen from '../screens/tickets.screen';
-import ContributionScreen from '../screens/contributuon.screen';
+import ContributionScreen from '../screens/contribution.screen';
 import MembershipScreen from '../screens/membership.screen';
 import ManageScreen from '../screens/manage.screen';
 import ShopScreen from '../screens/shop.screen';
+import CartScreen from '../screens/cart.screen';
 
 import {
   SIGN_UP_SCREEN,
@@ -27,6 +27,8 @@ import {
   TICKETS_SCREEN,
   MEMBERSHIP_SCREEN,
   SHOP_SCREEN,
+  CART_SCREEN,
+  USER_PROFILE_ROUTES,
 } from '../common/constants';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomeSideMenu from './customeSideMenu';
@@ -40,7 +42,6 @@ import TabIcon5 from '../res/images/TabIcon5.svg';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
-const TopTab = createMaterialTopTabNavigator();
 
 const CricantoTheme = {
   ...DefaultTheme,
@@ -50,7 +51,7 @@ const CricantoTheme = {
   },
 };
 
-const UserTabRoutes = () => {
+const UserProfileRoutes = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -77,15 +78,6 @@ const UserTabRoutes = () => {
   );
 };
 
-const ManageRoutes = () => {
-  return (
-    <TopTab.Navigator>
-      <TopTab.Screen name="Pending" component={ManageScreen} />
-      <TopTab.Screen name="Active" component={ManageScreen} />
-      <TopTab.Screen name="Deleted" component={ManageScreen} />
-    </TopTab.Navigator>
-  );
-};
 const DrawerNavigator = props => {
   return (
     <Drawer.Navigator
@@ -103,26 +95,12 @@ const DrawerNavigator = props => {
         component={TabNavigator}
       />
       <Drawer.Screen
-        options={{
-          headerTitle: 'Contribution',
-        }}
         name={CONTRIBUTION_SCREEN}
         component={ContributionScreen}
       />
-      <Drawer.Screen
-        options={{
-          headerTitle: 'Membership',
-        }}
-        name={MEMBERSHIP_SCREEN}
-        component={MembershipScreen}
-      />
-      <Drawer.Screen
-        options={{
-          headerTitle: 'Manage',
-        }}
-        name={MANAGE_SCREEN}
-        component={ManageRoutes}
-      />
+      <Drawer.Screen name={MEMBERSHIP_SCREEN} component={MembershipScreen} />
+      <Drawer.Screen name={MANAGE_SCREEN} component={ManageScreen} />
+      <Drawer.Screen name={CART_SCREEN} component={CartScreen} />
     </Drawer.Navigator>
   );
 };
@@ -138,14 +116,14 @@ const TabNavigator = props => {
           tabBarIcon: () => <TabIcon2 />,
         }}
         name="TestTab1"
-        component={UserTabRoutes}
+        component={UserProfileRoutes}
       />
       <Tab.Screen
         options={{
           tabBarIcon: () => <TabIcon5 />,
         }}
         name="TestTab2"
-        component={UserTabRoutes}
+        component={UserProfileRoutes}
       />
       <Tab.Screen
         options={{
@@ -159,15 +137,15 @@ const TabNavigator = props => {
           tabBarIcon: () => <TabIcon4 />,
           headerTitle: 'hh',
         }}
-        name="TestTab4"
+        name={SHOP_SCREEN}
         component={ShopScreen}
       />
       <Tab.Screen
         options={{
           tabBarIcon: () => <TabIcon1 />,
         }}
-        name={AUTH_ROUTES}
-        component={UserTabRoutes}
+        name={USER_PROFILE_ROUTES}
+        component={UserProfileRoutes}
       />
     </Tab.Navigator>
   );

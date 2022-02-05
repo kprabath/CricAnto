@@ -9,7 +9,7 @@ import {CricantoTextTypes} from '../enums';
 
 const Contribution = () => {
   return (
-    <CricantoHeader headerTitle="Contribution">
+    <CricantoHeader headerTitle="Contribution" backKey>
       <View style={styles.container}>
         <View style={styles.card1}>
           <CricantoText

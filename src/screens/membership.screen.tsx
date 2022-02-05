@@ -14,7 +14,7 @@ import DropdownIcon from '../res/images/DropdownIcon.svg';
 
 const Contribution = () => {
   return (
-    <CricantoHeader headerTitle="Membership ">
+    <CricantoHeader headerTitle="Membership" backKey>
       <View style={styles.container}>
         <View style={styles.card1}>
           <GoldLogo />

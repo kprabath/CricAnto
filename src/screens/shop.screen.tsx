@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {useNavigation} from '@react-navigation/native';
 import {
   FlatList,
   StyleSheet,
@@ -12,13 +12,14 @@ import Colors from '../res/colors';
 import {CricantoTextTypes} from '../enums';
 
 import {CricantoHeader, CricantoInput, CricantoText} from '../components';
+import {CART_SCREEN} from '../common/constants';
 
 import BackgroundImage from '../res/images/ShopBackground.svg';
 import SampleImage from '../res/images/SampleImage1.jpeg';
 import Shoe from '../res/images/Shoe.svg';
 import Bat from '../res/images/Bat.svg';
 import Discount from '../res/images/Discount.svg';
-import Message from '../res/images/Message.svg';
+import Search from '../res/images/Search.svg';
 import Cart from '../res/images/Cart.svg';
 import SampleProduct from '../res/images/SampleProduct.svg';
 
@@ -38,6 +39,7 @@ const DATA = [
 ];
 
 const Shop = () => {
+  const navigation = useNavigation();
   const topSlider = () => (
     <View style={styles.topSliderContainer}>
       <Image source={SampleImage} style={styles.sliderImage} />
@@ -69,14 +71,17 @@ const Shop = () => {
     </View>
   );
   return (
-    <CricantoHeader RightIcon={Cart} style={styles.headerStyle}>
+    <CricantoHeader
+      RightIcon={Cart}
+      style={styles.headerStyle}
+      rightIconAction={() => navigation.navigate(CART_SCREEN)}>
       <BackgroundImage style={styles.backgroundImage} />
 
       <View style={styles.container}>
         <CricantoInput
           style={styles.searchInput}
-          placeholder="Email"
-          Icon={Message}
+          placeholder="Search"
+          Icon={Search}
         />
         {topSlider()}
         <View style={styles.itemContainer}>

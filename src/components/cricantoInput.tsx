@@ -5,7 +5,7 @@ import colors from '../res/colors';
 const CricantoInput = ({placeholder, Icon, style}: IProps) => {
   return (
     <View style={[styles.container, style]}>
-      <View style={styles.sectionStyle}>
+      <View style={Icon ? styles.sectionStyle : styles.sectionStyleWithoutIcon}>
         {Icon && <Icon style={styles.imageStyle} />}
 
         <TextInput
@@ -25,6 +25,17 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   sectionStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.gray,
+    borderWidth: 1,
+    borderColor: colors.gray,
+    borderRadius: 14,
+  },
+  sectionStyleWithoutIcon: {
+    paddingHorizontal: 19,
+    paddingVertical: 16,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
