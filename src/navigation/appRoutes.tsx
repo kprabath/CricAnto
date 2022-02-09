@@ -18,10 +18,14 @@ import CartScreen from '../screens/cart.screen';
 import MatchStatusScreen from '../screens/matchStatus.screen';
 import ContributionSuccessScreen from '../screens/contributionSuccess.screen';
 import OrderSuccessScreen from '../screens/orderSuccess.screen';
+import UserManagementScreen from '../screens/userManagement.screen';
+import UserAccountScreen from '../screens/userAccount.screen';
 
 import {
   ORDER_SUCCESS_SCREEN,
+  USER_ACCOUNT_SCREEN,
   SIGN_UP_SCREEN,
+  USER_MANAGEMENT_SCREEN,
   LOGIN_SCREEN,
   WELCOME_SCREEN,
   CONTRIBUTION_SUCCESS_SCREEN,
@@ -44,6 +48,7 @@ import TabIcon2 from '../res/images/TabIcon2.svg';
 import TabIcon3 from '../res/images/TabIcon3.svg';
 import TabIcon4 from '../res/images/TabIcon4.svg';
 import TabIcon5 from '../res/images/TabIcon5.svg';
+import UserAccount from '../screens/userAccount.screen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -84,13 +89,7 @@ const DrawerNavigator = props => {
         headerShown: false,
       }}
       drawerContent={props => <CustomeSideMenu {...props} />}>
-      <Drawer.Screen
-        // options={{
-        //   headerTitle: 'Profile',
-        // }}
-        name={AUTH_ROUTES}
-        component={TabNavigator}
-      />
+      <Drawer.Screen name={AUTH_ROUTES} component={TabNavigator} />
       <Drawer.Screen
         name={CONTRIBUTION_SCREEN}
         component={ContributionScreen}
@@ -99,6 +98,11 @@ const DrawerNavigator = props => {
         name={CONTRIBUTION_SUCCESS_SCREEN}
         component={ContributionSuccessScreen}
       />
+      <Drawer.Screen
+        name={USER_MANAGEMENT_SCREEN}
+        component={UserManagementScreen}
+      />
+      <Drawer.Screen name={USER_ACCOUNT_SCREEN} component={UserAccountScreen} />
       <Drawer.Screen name={MEMBERSHIP_SCREEN} component={MembershipScreen} />
       <Drawer.Screen name={MANAGE_SCREEN} component={ManageScreen} />
       <Drawer.Screen name={CART_SCREEN} component={CartScreen} />

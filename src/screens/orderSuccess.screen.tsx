@@ -5,7 +5,7 @@ import colors from '../res/colors';
 import {CricantoButton, CricantoText} from '../components';
 import Success from '../res/images/Success.svg';
 import {getScaledNumber} from '../library/utils';
-import {PROFILE_SCREEN} from '../common/constants';
+import {SHOP_SCREEN} from '../common/constants';
 import Colors from '../res/colors';
 
 const OrderSuccess = () => {
@@ -24,13 +24,13 @@ For more details, go to my orders."
       <TouchableOpacity
         style={styles.orderBtn}
         onPress={() => {
-          navigation.navigate(PROFILE_SCREEN);
+          navigation.navigate(SHOP_SCREEN);
         }}>
         <Text style={styles.btnText}>My Orders</Text>
       </TouchableOpacity>
       <CricantoButton
         onPress={() => {
-          navigation.navigate(PROFILE_SCREEN);
+          navigation.navigate(SHOP_SCREEN);
         }}
         containerStyle={styles.btn}
         label="Continue shopping"

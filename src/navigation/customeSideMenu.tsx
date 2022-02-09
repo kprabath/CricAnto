@@ -14,6 +14,7 @@ import {
   CONTRIBUTION_SCREEN,
   MEMBERSHIP_SCREEN,
   MANAGE_SCREEN,
+  USER_MANAGEMENT_SCREEN,
 } from '../common/constants';
 
 const CustomSidebarMenu = ({navigation}) => {
@@ -30,7 +31,9 @@ const CustomSidebarMenu = ({navigation}) => {
           <Donate />
           <CricantoText label="Contribution" style={styles.subCategoryText} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.subCategory}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(USER_MANAGEMENT_SCREEN)}
+          style={styles.subCategory}>
           <Bag />
           <CricantoText label="User Mangement" style={styles.subCategoryText} />
         </TouchableOpacity>

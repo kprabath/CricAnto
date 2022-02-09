@@ -19,6 +19,7 @@ const CricantoText = ({label, type, style}: IProps) => {
     if (type === CricantoTextTypes.BUTTON_LBL) return styles.buttonLbl;
     if (type === CricantoTextTypes.HINT) return styles.hint;
     if (type === CricantoTextTypes.ERROR) return styles.error;
+    return styles.default;
   };
 
   return (
@@ -31,6 +32,10 @@ const CricantoText = ({label, type, style}: IProps) => {
 const styles = StyleSheet.create({
   display: {
     fontSize: getScaledNumber(40),
+    color: colors.cricantoLightBlack,
+  },
+  default:{
+    fontSize: getScaledNumber(13),
     color: colors.cricantoLightBlack,
   },
   headerOne: {

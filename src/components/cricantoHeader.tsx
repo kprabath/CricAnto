@@ -34,7 +34,7 @@ const CricantoHeader = ({
         <CricantoText
           label={headerTitle}
           style={styles.titleStyle}
-          type={CricantoTextTypes.H3}
+          type={CricantoTextTypes.BODY_SMALL}
         />
         <TouchableOpacity style={styles.headerBtn} onPress={rightIconAction}>
           {RightIcon && <RightIcon style={styles.headerBtn} />}

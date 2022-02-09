@@ -15,6 +15,7 @@ const colors = {
   cricantoLightBlack:'#3E4958',
   cricantoPurple: '#BF55EC',
   cricantoLightBlue: '#92A3FD',
+  cricantoGreen:'#39B12F',
   cricantoLightPurple:'rgba(17, 81, 251, 0.2)',
   cricantoLightGray:'#F7F8F9',
   linearColor1: '#9DCEFF',
