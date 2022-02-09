@@ -1,17 +1,32 @@
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {getScaledNumber} from '../library/utils';
 import {CricantoHeader} from '../components';
+import {MATCH_STATUS_SCREEN} from '../common/constants';
 
 import Ticket from '../res/images/Ticket.svg';
 
 const Tickets = () => {
+  const navigation = useNavigation();
   return (
-    <CricantoHeader headerTitle="Your Tickets" backKey containerStyle={styles.container}>
-      <Ticket />
-      <Ticket />
-      <Ticket />
+    <CricantoHeader
+      headerTitle="Your Tickets"
+      backKey
+      containerStyle={styles.container}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(MATCH_STATUS_SCREEN)}>
+        <Ticket />
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(MATCH_STATUS_SCREEN)}>
+        <Ticket />
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(MATCH_STATUS_SCREEN)}>
+        <Ticket />
+      </TouchableOpacity>
     </CricantoHeader>
   );
 };

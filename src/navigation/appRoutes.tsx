@@ -15,11 +15,16 @@ import MembershipScreen from '../screens/membership.screen';
 import ManageScreen from '../screens/manage.screen';
 import ShopScreen from '../screens/shop.screen';
 import CartScreen from '../screens/cart.screen';
+import MatchStatusScreen from '../screens/matchStatus.screen';
+import ContributionSuccessScreen from '../screens/contributionSuccess.screen';
+import OrderSuccessScreen from '../screens/orderSuccess.screen';
 
 import {
+  ORDER_SUCCESS_SCREEN,
   SIGN_UP_SCREEN,
   LOGIN_SCREEN,
   WELCOME_SCREEN,
+  CONTRIBUTION_SUCCESS_SCREEN,
   AUTH_ROUTES,
   MANAGE_SCREEN,
   CONTRIBUTION_SCREEN,
@@ -29,6 +34,7 @@ import {
   SHOP_SCREEN,
   CART_SCREEN,
   USER_PROFILE_ROUTES,
+  MATCH_STATUS_SCREEN,
 } from '../common/constants';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomeSideMenu from './customeSideMenu';
@@ -56,24 +62,15 @@ const UserProfileRoutes = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-      }}
-      // screenListeners={{
-      //   state: (e) => {
-      //     // Do something with the state
-      //     console.log('state changed', e.data);
-      //   },
-      // }}
-    >
+      }}>
       <Stack.Screen
         options={{headerTitle: 'Profile'}}
         name={PROFILE_SCREEN}
         component={ProfleScreen}
       />
-      <Stack.Screen
-        options={{headerTitle: 'Your Tickets'}}
-        name={TICKETS_SCREEN}
-        component={TicketsScreen}
-      />
+
+      <Stack.Screen name={MATCH_STATUS_SCREEN} component={MatchStatusScreen} />
+      <Stack.Screen name={TICKETS_SCREEN} component={TicketsScreen} />
     </Stack.Navigator>
   );
 };
@@ -98,9 +95,17 @@ const DrawerNavigator = props => {
         name={CONTRIBUTION_SCREEN}
         component={ContributionScreen}
       />
+      <Stack.Screen
+        name={CONTRIBUTION_SUCCESS_SCREEN}
+        component={ContributionSuccessScreen}
+      />
       <Drawer.Screen name={MEMBERSHIP_SCREEN} component={MembershipScreen} />
       <Drawer.Screen name={MANAGE_SCREEN} component={ManageScreen} />
       <Drawer.Screen name={CART_SCREEN} component={CartScreen} />
+      <Drawer.Screen
+        name={ORDER_SUCCESS_SCREEN}
+        component={OrderSuccessScreen}
+      />
     </Drawer.Navigator>
   );
 };

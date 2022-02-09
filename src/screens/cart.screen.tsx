@@ -1,10 +1,10 @@
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 import {StyleSheet, View, TouchableOpacity, FlatList} from 'react-native';
 import {getScaledNumber} from '../library/utils';
 import Colors from '../res/colors';
-import {CricantoTextTypes} from '../enums';
-
+import {ORDER_SUCCESS_SCREEN} from '../common/constants';
 import {
   CricantoHeader,
   CricantoInput,
@@ -32,6 +32,7 @@ const DATA = [
 ];
 
 const Cart = () => {
+  const navigation = useNavigation();
   return (
     <CricantoHeader headerTitle="My Cart" backKey>
       <View style={styles.container}>
@@ -61,7 +62,11 @@ const Cart = () => {
           <CricantoText label="Rs48000.00" style={styles.totalText} />
         </View>
       </View>
-      <CricantoButton label="Checkout" style={styles.checkoutBtn} />
+      <CricantoButton
+        label="Checkout"
+        style={styles.checkoutBtn}
+        onPress={() => navigation.navigate(ORDER_SUCCESS_SCREEN)}
+      />
     </CricantoHeader>
   );
 };
