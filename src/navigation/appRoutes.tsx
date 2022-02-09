@@ -76,6 +76,12 @@ const UserProfileRoutes = () => {
 
       <Stack.Screen name={MATCH_STATUS_SCREEN} component={MatchStatusScreen} />
       <Stack.Screen name={TICKETS_SCREEN} component={TicketsScreen} />
+
+      <Drawer.Screen
+        name={USER_MANAGEMENT_SCREEN}
+        component={UserManagementScreen}
+      />
+      <Drawer.Screen name={USER_ACCOUNT_SCREEN} component={UserAccountScreen} />
     </Stack.Navigator>
   );
 };
@@ -98,11 +104,7 @@ const DrawerNavigator = props => {
         name={CONTRIBUTION_SUCCESS_SCREEN}
         component={ContributionSuccessScreen}
       />
-      <Drawer.Screen
-        name={USER_MANAGEMENT_SCREEN}
-        component={UserManagementScreen}
-      />
-      <Drawer.Screen name={USER_ACCOUNT_SCREEN} component={UserAccountScreen} />
+
       <Drawer.Screen name={MEMBERSHIP_SCREEN} component={MembershipScreen} />
       <Drawer.Screen name={MANAGE_SCREEN} component={ManageScreen} />
       <Drawer.Screen name={CART_SCREEN} component={CartScreen} />

@@ -74,7 +74,7 @@ const UserAccount = () => {
   );
 
   return (
-    <CricantoHeader headerTitle="User Management" RightIcon={Menu}>
+    <CricantoHeader backKey headerTitle="User Management" RightIcon={Menu}>
       <View style={styles.container}>
         <View style={styles.userContent}>
           <UserDP />

@@ -13,6 +13,7 @@ import Shop from '../res/images/Shop.svg';
 import {
   CONTRIBUTION_SCREEN,
   MEMBERSHIP_SCREEN,
+  SHOP_SCREEN,
   MANAGE_SCREEN,
   USER_MANAGEMENT_SCREEN,
 } from '../common/constants';
@@ -21,7 +22,9 @@ const CustomSidebarMenu = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
-        <TouchableOpacity style={styles.mainCategory}>
+        <TouchableOpacity
+          style={styles.mainCategory}
+          onPress={() => navigation.navigate(SHOP_SCREEN)}>
           <Home />
           <CricantoText label="Home" style={styles.mainCategoryText} />
         </TouchableOpacity>
@@ -53,7 +56,9 @@ const CustomSidebarMenu = ({navigation}) => {
           <CricantoText label="Membership" style={styles.subCategoryText} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.mainCategory}>
+        <TouchableOpacity
+          style={styles.mainCategory}
+          onPress={() => navigation.navigate(SHOP_SCREEN)}>
           <Shop />
           <CricantoText label="Shop" style={styles.mainCategoryText} />
         </TouchableOpacity>
