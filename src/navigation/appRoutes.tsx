@@ -25,6 +25,8 @@ import NotificationsScreen from '../screens/notifications.screen';
 import UploadScreen from '../screens/upload.screen';
 import TournamentsScreen from '../screens/tournaments.screen';
 import EventsScreen from '../screens/events.screen';
+import TournamentDetailScreen from '../screens/tournamentDetail.screen';
+import VideoBufferScreen from '../screens/VideoBuffer.screen';
 
 import {
   EVENTS_SCREEN,
@@ -49,6 +51,8 @@ import {
   NOTIFICATION_SCREEN,
   UPLOAD_SCREEN,
   TOURNAMENTS_SCREEN,
+  TOURNAMENTS_DETAIL_SCREEN,
+  VIDEO_STREAM_SCREEN,
 } from '../common/constants';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomeSideMenu from './customeSideMenu';
@@ -205,6 +209,14 @@ const AppRoutes = () => {
         <Stack.Screen name={LOGIN_SCREEN} component={LoginScreen} />
         <Stack.Screen name={WELCOME_SCREEN} component={WelcomeScreen} />
         <Stack.Screen name={AUTH_ROUTES} component={DrawerNavigator} />
+        <Stack.Screen
+          name={TOURNAMENTS_DETAIL_SCREEN}
+          component={TournamentDetailScreen}
+        />
+        <Stack.Screen
+          name={VIDEO_STREAM_SCREEN}
+          component={VideoBufferScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -37,6 +37,21 @@ const colors = {
   lightRose: '#FFE7E8',
   purple: '#783175',
   lightBerry: '#FFEFFE',
+
+  lighterDark: '#BC9999',
+
+  // red color shades
+  darkerRed: '#FF0000',
+
+  //grey shades
+  veryDarkGrey: '#7A7A7A',
+
+  //blue shades
+  lightestBlue: '#0CB6FF',
+
+  //green shades
+  yellowishGreen: '#CDCA76',
+  darkGreeb: '#116D73',
 };
 
 export default colors;

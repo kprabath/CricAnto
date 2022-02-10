@@ -1,17 +1,21 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {CricantoTextTypes} from '../enums';
+import {StyleSheet} from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
+
+import {CricantoHeader, CricantoInput} from '../components';
+import {MatchDetailCard} from '../components/MatchDetailCard';
+
 import {getScaledNumber} from '../library/utils';
-import {CricantoHeader, CricantoInput, CricantoText} from '../components';
-
-import Team1 from '../res/images/TeamLogo1.svg';
-import Team2 from '../res/images/TeamLogo2.svg';
-import Search from '../res/images/Search.svg';
-import Add from '../res/images/AddIcon.svg';
-
 import Colors from '../res/colors';
 
+import Search from '../res/images/Search.svg';
+import Add from '../res/images/AddIcon.svg';
+import {TOURNAMENTS_DETAIL_SCREEN} from '../common/constants';
+
 const Home = () => {
+  const data = [0, 1, 2];
+  const navigate = useNavigation().navigate;
 
   return (
     <CricantoHeader
@@ -23,65 +27,14 @@ const Home = () => {
         placeholder="Search by events, teams"
         Icon={Search}
       />
-      <View style={styles.statusContainer}>
-        <CricantoText style={styles.teamText} label="ST ANT  VS  TCK" />
-
-        <View style={styles.scoreContainer}>
-          <View style={styles.score}>
-            <Team1 />
-            <CricantoText label="147/3" style={styles.scoreText} />
-          </View>
-          <View style={styles.score}>
-            <CricantoText label="yet to bat" style={styles.scoreText} />
-            <Team2 />
-          </View>
-        </View>
-        <CricantoText
-          label="WATCH LIVE"
-          type={CricantoTextTypes.H3}
-          style={styles.liveText}
-        />
-      </View>
-
-      <View style={styles.statusContainer}>
-        <CricantoText style={styles.teamText} label="ST ANT  VS  TCK" />
-
-        <View style={styles.scoreContainer}>
-          <View style={styles.score}>
-            <Team1 />
-            <CricantoText label="147/3" style={styles.scoreText} />
-          </View>
-          <View style={styles.score}>
-            <CricantoText label="yet to bat" style={styles.scoreText} />
-            <Team2 />
-          </View>
-        </View>
-        <CricantoText
-          label="WATCH LIVE"
-          type={CricantoTextTypes.H3}
-          style={styles.liveText}
-        />
-      </View>
-
-      <View style={styles.statusContainer}>
-        <CricantoText style={styles.teamText} label="ST ANT  VS  TCK" />
-
-        <View style={styles.scoreContainer}>
-          <View style={styles.score}>
-            <Team1 />
-            <CricantoText label="147/3" style={styles.scoreText} />
-          </View>
-          <View style={styles.score}>
-            <CricantoText label="yet to bat" style={styles.scoreText} />
-            <Team2 />
-          </View>
-        </View>
-        <CricantoText
-          label="WATCH LIVE"
-          type={CricantoTextTypes.H3}
-          style={styles.liveText}
-        />
-      </View>
+      <FlatList
+        data={data}
+        renderItem={() => (
+          <MatchDetailCard
+            onPress={() => navigate(TOURNAMENTS_DETAIL_SCREEN)}
+          />
+        )}
+      />
     </CricantoHeader>
   );
 };
@@ -128,7 +81,6 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingHorizontal: getScaledNumber(20),
-    alignItems: 'center',
     flexDirection: 'column',
   },
 });
