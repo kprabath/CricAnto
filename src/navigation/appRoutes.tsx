@@ -20,8 +20,14 @@ import ContributionSuccessScreen from '../screens/contributionSuccess.screen';
 import OrderSuccessScreen from '../screens/orderSuccess.screen';
 import UserManagementScreen from '../screens/userManagement.screen';
 import UserAccountScreen from '../screens/userAccount.screen';
+import HomeScreen from '../screens/home.screen';
+import NotificationsScreen from '../screens/notifications.screen';
+import UploadScreen from '../screens/upload.screen';
+import TournamentsScreen from '../screens/tournaments.screen';
+import EventsScreen from '../screens/events.screen';
 
 import {
+  EVENTS_SCREEN,
   ORDER_SUCCESS_SCREEN,
   USER_ACCOUNT_SCREEN,
   SIGN_UP_SCREEN,
@@ -37,8 +43,12 @@ import {
   MEMBERSHIP_SCREEN,
   SHOP_SCREEN,
   CART_SCREEN,
+  HOME_SCREEN,
   USER_PROFILE_ROUTES,
   MATCH_STATUS_SCREEN,
+  NOTIFICATION_SCREEN,
+  UPLOAD_SCREEN,
+  TOURNAMENTS_SCREEN,
 } from '../common/constants';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomeSideMenu from './customeSideMenu';
@@ -62,6 +72,24 @@ const CricantoTheme = {
   },
 };
 
+const HomeRoutes = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName={HOME_SCREEN}>
+      <Stack.Screen name={HOME_SCREEN} component={HomeScreen} />
+      <Stack.Screen
+        name={NOTIFICATION_SCREEN}
+        component={NotificationsScreen}
+      />
+
+      <Stack.Screen name={UPLOAD_SCREEN} component={UploadScreen} />
+    </Stack.Navigator>
+  );
+};
+
 const UserProfileRoutes = () => {
   return (
     <Stack.Navigator
@@ -77,11 +105,11 @@ const UserProfileRoutes = () => {
       <Stack.Screen name={MATCH_STATUS_SCREEN} component={MatchStatusScreen} />
       <Stack.Screen name={TICKETS_SCREEN} component={TicketsScreen} />
 
-      <Drawer.Screen
+      <Stack.Screen
         name={USER_MANAGEMENT_SCREEN}
         component={UserManagementScreen}
       />
-      <Drawer.Screen name={USER_ACCOUNT_SCREEN} component={UserAccountScreen} />
+      <Stack.Screen name={USER_ACCOUNT_SCREEN} component={UserAccountScreen} />
     </Stack.Navigator>
   );
 };
@@ -126,22 +154,22 @@ const TabNavigator = props => {
         options={{
           tabBarIcon: () => <TabIcon2 />,
         }}
-        name="TestTab1"
-        component={UserProfileRoutes}
+        name={HOME_SCREEN}
+        component={HomeRoutes}
       />
       <Tab.Screen
         options={{
           tabBarIcon: () => <TabIcon5 />,
         }}
-        name="TestTab2"
-        component={UserProfileRoutes}
+        name={EVENTS_SCREEN}
+        component={EventsScreen}
       />
       <Tab.Screen
         options={{
           tabBarIcon: () => <TabIcon3 />,
         }}
-        name="TesTab3"
-        component={ShopScreen}
+        name={TOURNAMENTS_SCREEN}
+        component={TournamentsScreen}
       />
       <Tab.Screen
         options={{

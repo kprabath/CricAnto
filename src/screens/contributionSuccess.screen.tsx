@@ -5,7 +5,7 @@ import colors from '../res/colors';
 import {CricantoButton, CricantoText} from '../components';
 import Success from '../res/images/Success.svg';
 import {getScaledNumber} from '../library/utils';
-import {PROFILE_SCREEN} from '../common/constants';
+import {HOME_SCREEN} from '../common/constants';
 
 const ContributionSuccess = () => {
   const navigation = useNavigation();
@@ -17,7 +17,7 @@ const ContributionSuccess = () => {
       </View>
       <CricantoButton
         onPress={() => {
-          navigation.navigate(PROFILE_SCREEN);
+          navigation.navigate(HOME_SCREEN);
         }}
         containerStyle={styles.btn}
         label="Go Back to Home"
