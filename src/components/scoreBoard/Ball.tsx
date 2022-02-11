@@ -22,6 +22,7 @@ export default ({score}: IProps) => {
 
   return (
     <CircleView
+      style={styles.ballContainer}
       margin={3}
       height={getScaledNumber(25)}
       width={getScaledNumber(25)}
@@ -37,5 +38,8 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: 'bold',
     fontSize: 8,
+  },
+  ballContainer: {
+    alignItems: 'center',
   },
 });

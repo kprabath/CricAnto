@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Animated, {
   EasingNode,
@@ -13,7 +13,7 @@ import CircleView from '../CircleView';
 import ScoreBoard from './ScoreBoard';
 
 import Triangle from '../../res/images/Triangle.svg';
-import {getScaledNumber} from '../../library/utils';
+import {getScaledNumber, SCREEN_WIDTH} from '../../library/utils';
 import colors from '../../res/colors';
 import OverBoard from './OverBoard';
 
@@ -51,10 +51,11 @@ export default (props: Iprops) => {
   });
 
   return (
-    <>
+    <View style={styles.container}>
       <TouchableOpacity onPress={animateHeight}>
         <CircleView
           colors={['#92A3FD', '#9DCEFF']}
+          width={SCREEN_WIDTH * 0.9}
           height={getScaledNumber(60)}>
           <View style={styles.accordianContainer}>
             <CricantoText style={styles.text} label={props.team} />
@@ -89,11 +90,14 @@ export default (props: Iprops) => {
           <OverBoard /> */}
         </View>
       </Animated.View>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    marginVertical: getScaledNumber(10),
+  },
   accordianContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

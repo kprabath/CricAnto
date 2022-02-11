@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {ReactElement} from 'react';
+import {StyleProp, ViewStyle} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {getScaledNumber} from '../library/utils';
@@ -15,9 +16,10 @@ export type CircleIProps = {
   padding?: number;
   margin?: number;
   colors?: string[];
+  style?: StyleProp<ViewStyle>;
 };
 
-export default (props: CircleIProps) => (
+const CircleView = (props: CircleIProps) => (
   <LinearGradient
     colors={props.colors ?? [props.backgroundColors, props.backgroundColors]}
     style={{
@@ -27,8 +29,14 @@ export default (props: CircleIProps) => (
       padding: props.padding ?? getScaledNumber(10),
       margin: props.margin ?? 0,
       justifyContent: 'center',
-      alignItems: 'center',
+      ...props.style,
     }}>
     {props.children}
   </LinearGradient>
 );
+
+CircleView.defaultProps = {
+  style: {},
+};
+
+export default CircleView;

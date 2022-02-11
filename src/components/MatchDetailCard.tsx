@@ -1,5 +1,11 @@
 import React from 'react';
-import {ImageURISource, View, StyleSheet} from 'react-native';
+import {
+  ImageURISource,
+  View,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import {CricantoTextTypes} from '../enums';
@@ -18,11 +24,14 @@ export type IProps = {
   team2Image?: ImageURISource;
   description?: string;
   onPress?: Function;
+  style?: StyleProp<ViewStyle>;
 };
 
 export const MatchDetailCard = (props: IProps) => {
   return (
-    <TouchableOpacity onPress={props.onPress} style={styles.statusContainer}>
+    <TouchableOpacity
+      onPress={props.onPress}
+      style={[styles.statusContainer, props.style]}>
       <>
         <CricantoText style={styles.teamText} label="ST ANT  VS  TCK" />
 

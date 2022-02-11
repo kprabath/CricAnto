@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useRef} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
 import {VIDEO_STREAM_SCREEN} from '../common/constants';
 
 import {CricantoHeader, CricantoInput, CricantoText} from '../components';
@@ -10,7 +10,7 @@ import LiveEventIndicator from '../components/LiveEventIndicator';
 import {MatchDetailCard} from '../components/MatchDetailCard';
 import ScoreAccordian from '../components/scoreBoard/ScoreAccordian';
 
-import {getScaledNumber} from '../library/utils';
+import {getScaledNumber, SCREEN_WIDTH} from '../library/utils';
 import colors from '../res/colors';
 
 import Search from '../res/images/Search.svg';
@@ -32,8 +32,12 @@ const Pressable = ({
 );
 
 export default () => {
-  const [cardType, setCardTypeState] = useState<'Score' | 'Over'>('Score');
   const navigate = useNavigation().navigate;
+
+  const scrollToIndex = (index: number) =>
+    ref.current.scrollToIndex({animated: true, index: index});
+
+  const ref = useRef();
   return (
     <CricantoHeader
       headerTitle="Tournaments"
@@ -46,28 +50,60 @@ export default () => {
         placeholder="Search by events, teams"
         Icon={Search}
       />
-      <View style={styles.content}>
-        <MatchDetailCard onPress={() => navigate(VIDEO_STREAM_SCREEN)} />
+      <View>
+        <View style={styles.card}>
+          <MatchDetailCard onPress={() => navigate(VIDEO_STREAM_SCREEN)} />
+        </View>
         <View style={styles.descriptorContainer}>
           <Pressable
             bgColorStyle={colors.cricantoLightBlue}
             title="SCORECARD"
-            onPress={() => setCardTypeState('Score')}
+            onPress={() => scrollToIndex(0)}
           />
           <Pressable
             bgColorStyle={colors.linearColor1}
             title="OVERS"
-            onPress={() => setCardTypeState('Over')}
+            onPress={() => scrollToIndex(1)}
           />
         </View>
 
         <View style={styles.scoreList}>
           {/* lets swap the list  */}
-          {cardType === 'Score' ? (
-            <ScoreAccordian cardType={'Score'} team="ST ANT" score="147/3" />
-          ) : (
-            <ScoreAccordian cardType={'Over'} team="ST ANT" score="147/3" />
-          )}
+          <FlatList
+            ref={ref}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={[0, 1]}
+            renderItem={({item}) =>
+              item <= 0 ? (
+                <View style={styles.scoreList}>
+                  <ScoreAccordian
+                    cardType={'Score'}
+                    team="ST ANT"
+                    score="147/3"
+                  />
+                  <ScoreAccordian
+                    cardType={'Score'}
+                    team="ST ANT"
+                    score="147/3"
+                  />
+                </View>
+              ) : (
+                <View style={styles.scoreList}>
+                  <ScoreAccordian
+                    cardType={'Over'}
+                    team="ST ANT"
+                    score="147/3"
+                  />
+                  <ScoreAccordian
+                    cardType={'Over'}
+                    team="ST ANT"
+                    score="147/3"
+                  />
+                </View>
+              )
+            }
+          />
         </View>
       </View>
     </CricantoHeader>
@@ -76,7 +112,12 @@ export default () => {
 
 const styles = StyleSheet.create({
   scoreList: {
-    marginVertical: getScaledNumber(42),
+    width: SCREEN_WIDTH,
+    alignItems: 'center',
+  },
+  card: {
+    marginLeft: 10,
+    marginRight: 10,
   },
   descriptorContainer: {
     flexDirection: 'row',
