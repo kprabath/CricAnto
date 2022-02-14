@@ -9,14 +9,10 @@
  */
 import 'react-native-gesture-handler';
 import React from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-} from 'react-native';
+import {StatusBar, StyleSheet, useColorScheme} from 'react-native';
 import AppRoutes from './navigation/appRoutes';
 import Colors from './res/colors';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';

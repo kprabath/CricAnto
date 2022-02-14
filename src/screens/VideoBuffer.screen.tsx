@@ -4,6 +4,8 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import {CricantoHeader, CricantoText} from '../components';
 import CircleView from '../components/CircleView';
+import CommentBox from '../components/commentBox/CommentBox';
+import CommentThumbnail from '../components/commentBox/CommentThumbnail';
 import LiveEventIndicator from '../components/LiveEventIndicator';
 import VideoPlayer from '../components/VidePlayer';
 
@@ -12,7 +14,7 @@ import colors from '../res/colors';
 
 export default () => {
   return (
-    <CricantoHeader containerStyle={style.container} backKey>
+    <CricantoHeader isScrollView containerStyle={style.container} backKey>
       <LiveEventIndicator hideEventButton />
       <View style={style.videoViewWrapper}>
         <VideoPlayer
@@ -25,6 +27,16 @@ export default () => {
           <CricantoText style={style.subscribeButtonText} label="SUBSCRIBE" />
         </CircleView>
       </TouchableOpacity>
+      <View>
+        <CommentBox>
+          <CommentBox
+            style={{flex: 1}}
+            hideThumbnail
+            headerChildre={<CommentThumbnail style={{flex: 0.2}} />}>
+            <CommentBox style={{flex: 1}} hideThumbnail />
+          </CommentBox>
+        </CommentBox>
+      </View>
     </CricantoHeader>
   );
 };

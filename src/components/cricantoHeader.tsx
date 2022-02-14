@@ -27,6 +27,7 @@ const CricantoHeader = ({
   headerTitleStyle,
   children,
   isScrollView,
+  autoScroll,
 }: IProps) => {
   const navigation = useNavigation();
   const scrollViewRef = useRef();
@@ -56,7 +57,7 @@ const CricantoHeader = ({
           style={styles.container}
           ref={scrollViewRef}
           onContentSizeChange={() =>
-            scrollViewRef.current.scrollToEnd({animated: true})
+            autoScroll && scrollViewRef.current.scrollToEnd({animated: true})
           }
           contentContainerStyle={[containerStyle]}>
           {children}
@@ -106,6 +107,7 @@ export interface IProps {
   children?: any;
   rightIconAction?: any;
   isScrollView?: boolean;
+  autoScroll?: false;
 }
 
 export default CricantoHeader;

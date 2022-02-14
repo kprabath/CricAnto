@@ -1,15 +1,23 @@
-import React, {useState} from 'react';
-import {Modal, StyleSheet, Text, Pressable, View} from 'react-native';
+import React, {ReactElement} from 'react';
+import {Modal, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 
-const CricantoModal = ({setModalVisible, modalVisible,children}) => {
+const CricantoModal = ({
+  modalVisible,
+  children,
+  contentStyle,
+}: {
+  modalVisible: boolean;
+  children: ReactElement;
+  contentStyle?: StyleProp<ViewStyle>;
+}) => {
   return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={modalVisible}
       style={styles.container}>
-      <View style={styles.container}>
-        <View style={styles.modalView}>{children}</View>
+      <View style={[styles.container]}>
+        <View style={[styles.modalView, contentStyle]}>{children}</View>
       </View>
     </Modal>
   );

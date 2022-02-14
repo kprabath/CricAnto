@@ -19,6 +19,7 @@ import Colors from '../res/colors';
 
 const UserAccount = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [useRoleModal, setUserRoleModal] = useState(false);
   const navigation = useNavigation();
 
   const modalView = () => (
@@ -73,6 +74,57 @@ const UserAccount = () => {
     </View>
   );
 
+  const modalView2 = () => (
+    <View style={[styles.modalContainer]}>
+      <View style={styles.checkboxContainer}>
+        <CricantoText
+          label="Admin"
+          type={CricantoTextTypes.BODY_SMALL}
+          style={styles.checkBoxTextStyle}
+        />
+        <CheckBox
+          boxType="square"
+          lineWidth={1.0}
+          // value={isSelected}
+          // onValueChange={setSelection}
+          style={styles.checkbox}
+        />
+      </View>
+      <View style={styles.checkboxContainer}>
+        <CricantoText
+          label="Editor"
+          type={CricantoTextTypes.BODY_SMALL}
+          style={styles.checkBoxTextStyle}
+        />
+        <CheckBox
+          boxType="square"
+          lineWidth={1.0}
+          // value={isSelected}
+          // onValueChange={setSelection}
+          style={styles.checkbox}
+        />
+      </View>
+      <View style={styles.checkboxContainer}>
+        <CricantoText
+          label="User"
+          type={CricantoTextTypes.BODY_SMALL}
+          style={styles.checkBoxTextStyle}
+        />
+        <CheckBox
+          boxType="square"
+          lineWidth={1.0}
+          // value={isSelected}
+          // onValueChange={setSelection}
+          style={styles.checkbox}
+        />
+      </View>
+      <CricantoButton
+        label="Done"
+        containerStyle={styles.btnStyle}
+        onPress={() => setUserRoleModal(false)}
+      />
+    </View>
+  );
   return (
     <CricantoHeader backKey headerTitle="User Management" RightIcon={Menu}>
       <View style={styles.container}>
@@ -83,7 +135,9 @@ const UserAccount = () => {
               label="Muththaiya Muralitharan"
               type={CricantoTextTypes.H4}
             />
-            <TouchableOpacity style={styles.editBtn}>
+            <TouchableOpacity
+              onPress={() => setUserRoleModal(true)}
+              style={styles.editBtn}>
               <CricantoText
                 label="Edit Role"
                 type={CricantoTextTypes.H4}
@@ -154,11 +208,8 @@ const UserAccount = () => {
           </View>
         </View>
       </View>
-      <CricantoModal
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}>
-        {modalView()}
-      </CricantoModal>
+      <CricantoModal modalVisible={modalVisible}>{modalView()}</CricantoModal>
+      <CricantoModal modalVisible={useRoleModal}>{modalView2()}</CricantoModal>
     </CricantoHeader>
   );
 };

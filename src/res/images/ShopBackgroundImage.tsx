@@ -1,30 +1,38 @@
-import React from 'react';
-import Svg, {Path, Defs, LinearGradient, Stop} from 'react-native-svg';
+import * as React from 'react';
+import Svg, {
+  SvgProps,
+  Path,
+  Defs,
+  LinearGradient,
+  Stop,
+} from 'react-native-svg';
+import {getSVGDynamicHeightOrWidth} from '../../library/utils';
 
-import colors from 'res/colors';
-
-export default ({width = 24, height = 24}) => (
+const SvgComponent = (props: SvgProps) => (
   <Svg
-    width="375"
-    height="231"
-    viewBox="0 0 375 231"
+    width={props.width}
+    height={getSVGDynamicHeightOrWidth(271, 375, props.width, 'Width')}
     fill="none"
-    xmlns="http://www.w3.org/2000/Svg">
+    viewBox="0 0 375 231"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}>
     <Path
-      d="M375 193C375 213.987 357.987 231 337 231L38 231C17.0132 231 -2.90302e-05 213.987 -2.71955e-05 193L-1.20714e-05 20C-1.11057e-05 8.9543 8.9543 -1.48315e-06 20 -5.1751e-07L355 2.87691e-05C366.046 2.97348e-05 375 8.95433 375 20L375 193Z"
-      fill="url(#paint0_linear_917_2301)"
+      d="M375 193c0 20.987-17.013 38-38 38H38c-20.987 0-38-17.013-38-38V20C0 8.954 8.954 0 20 0h335c11.046 0 20 8.954 20 20v173Z"
+      fill="url(#a)"
     />
     <Defs>
       <LinearGradient
-        id="paint0_linear_917_2301"
-        x1="-134.5"
-        y1="327.5"
-        x2="444.5"
-        y2="-43.5"
+        id="a"
+        x1={-134.5}
+        y1={327.5}
+        x2={444.5}
+        y2={-43.5}
         gradientUnits="userSpaceOnUse">
-        <Stop stop-color="#92A3FD" />
-        <Stop offset="1" stop-color="#9DCEFF" />
+        <Stop stopColor="#92A3FD" />
+        <Stop offset={1} stopColor="#9DCEFF" />
       </LinearGradient>
     </Defs>
   </Svg>
 );
+
+export default SvgComponent;

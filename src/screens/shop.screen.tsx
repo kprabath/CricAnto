@@ -7,14 +7,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {getScaledNumber} from '../library/utils';
+import {getScaledNumber, SCREEN_HEIGHT, SCREEN_WIDTH} from '../library/utils';
 import Colors from '../res/colors';
 import {CricantoTextTypes} from '../enums';
 
 import {CricantoHeader, CricantoInput, CricantoText} from '../components';
 import {CART_SCREEN} from '../common/constants';
 
-import BackgroundImage from '../res/images/ShopBackground.svg';
+import BackgroundImage from '../res/images/ShopBackgroundImage';
 import SampleImage from '../res/images/SampleImage1.jpeg';
 import Shoe from '../res/images/Shoe.svg';
 import Bat from '../res/images/Bat.svg';
@@ -22,6 +22,8 @@ import Discount from '../res/images/Discount.svg';
 import Search from '../res/images/Search.svg';
 import Cart from '../res/images/Cart.svg';
 import SampleProduct from '../res/images/SampleProduct.svg';
+import LinearGradient from 'react-native-linear-gradient';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const DATA = [
   {
@@ -75,7 +77,21 @@ const Shop = () => {
       RightIcon={Cart}
       style={styles.headerStyle}
       rightIconAction={() => navigation.navigate(CART_SCREEN)}>
-      <BackgroundImage style={styles.backgroundImage} />
+      <SafeAreaView style={{backgroundColor: '#92A3FD'}} />
+      {/* <BackgroundImage width={SCREEN_WIDTH} style={styles.backgroundImage} /> */}
+      <LinearGradient
+        colors={['#92A3FD', '#9DCEFF']}
+        style={{
+          height: SCREEN_HEIGHT * 0.3,
+          zIndex: -1,
+          position: 'absolute',
+          right: 0,
+          left: 0,
+          top: 0,
+          borderBottomLeftRadius: getScaledNumber(30),
+          borderBottomRightRadius: getScaledNumber(30),
+        }}
+      />
 
       <View style={styles.container}>
         <CricantoInput
@@ -266,6 +282,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -50,
     left: 7,
+    width: SCREEN_WIDTH,
   },
 });
 

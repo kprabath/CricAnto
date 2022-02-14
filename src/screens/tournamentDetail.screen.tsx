@@ -42,6 +42,7 @@ export default () => {
     <CricantoHeader
       headerTitle="Tournaments"
       backKey
+      autoScroll
       isScrollView
       headerTitleStyle={styles.headerTitle}>
       <LiveEventIndicator />
