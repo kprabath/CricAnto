@@ -9,6 +9,7 @@ import Menu from '../res/images/MenuIcon.svg';
 const Notifications = () => {
   return (
     <CricantoHeader
+    enableHeader
       headerTitle="Notification"
       backKey
       RightIcon={Menu}

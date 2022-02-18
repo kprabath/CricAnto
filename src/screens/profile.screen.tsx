@@ -18,7 +18,7 @@ import Colors from '../res/colors';
 const Profile = () => {
   const navigation = useNavigation();
   return (
-    <CricantoHeader headerTitle="Profile">
+    <CricantoHeader enableHeader headerTitle="Profile">
       <View style={styles.container}>
         <View style={styles.userContent}>
           <UserDP />

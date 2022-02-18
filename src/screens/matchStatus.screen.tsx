@@ -13,6 +13,7 @@ const MatchStatus = () => {
     <CricantoHeader
       headerTitle="ST VS TCK"
       backKey
+      enableHeader
       containerStyle={styles.container}>
       <Ticket />
       <View style={styles.infoContainer}>

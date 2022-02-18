@@ -48,7 +48,7 @@ const Contribution = () => {
   );
 
   return (
-    <CricantoHeader headerTitle="Membership" backKey>
+    <CricantoHeader enableHeader headerTitle="Membership" backKey>
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() => setModalVsible(true)}

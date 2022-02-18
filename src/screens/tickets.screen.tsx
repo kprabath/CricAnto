@@ -12,6 +12,7 @@ const Tickets = () => {
   const navigation = useNavigation();
   return (
     <CricantoHeader
+    enableHeader
       headerTitle="Your Tickets"
       backKey
       containerStyle={styles.container}>

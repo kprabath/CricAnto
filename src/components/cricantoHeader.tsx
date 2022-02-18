@@ -15,12 +15,15 @@ import DrawerIcon from '../res/images/DrawerIcon.svg';
 import LeftArrow from '../res/images/LeftArrow.svg';
 import CricantoText from './cricantoText';
 import {ScrollView} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const CricantoHeader = ({
   headerTitle,
-  style,
+  headerStyle,
   RightIcon,
   onPress,
+  safeAreaStyle,
+  enableHeader,
   containerStyle,
   backKey,
   rightIconAction,
@@ -32,45 +35,58 @@ const CricantoHeader = ({
   const navigation = useNavigation();
   const scrollViewRef = useRef();
   return (
-    <View style={styles.container}>
-      <View style={[styles.headerContainer, style]}>
-        <TouchableOpacity
-          style={styles.headerBtn}
-          onPress={
-            backKey
-              ? () => navigation?.goBack()
-              : () => navigation?.openDrawer()
-          }>
-          {backKey ? <LeftArrow /> : <DrawerIcon />}
-        </TouchableOpacity>
-        <CricantoText
-          label={headerTitle}
-          style={[styles.titleStyle, headerTitleStyle]}
-          type={CricantoTextTypes.BODY_SMALL}
-        />
-        <TouchableOpacity style={styles.headerBtn} onPress={rightIconAction}>
-          {RightIcon && <RightIcon style={styles.headerBtn} />}
-        </TouchableOpacity>
-      </View>
-      {isScrollView ? (
-        <ScrollView
-          style={styles.container}
-          ref={scrollViewRef}
-          onContentSizeChange={() =>
-            autoScroll && scrollViewRef.current.scrollToEnd({animated: true})
-          }
-          contentContainerStyle={[containerStyle]}>
-          {children}
-        </ScrollView>
-      ) : (
-        <View style={[styles.container, containerStyle]}>{children}</View>
-      )}
-    </View>
+    <>
+      <SafeAreaView
+        style={[styles.safeAreaContainer, safeAreaStyle]}
+      >
+        {enableHeader && (
+          <View style={[styles.headerContainer, headerStyle]}>
+            <TouchableOpacity
+              style={styles.headerBtn}
+              onPress={
+                backKey
+                  ? () => navigation?.goBack()
+                  : () => navigation?.openDrawer()
+              }>
+              {backKey ? <LeftArrow /> : <DrawerIcon />}
+            </TouchableOpacity>
+            <CricantoText
+              label={headerTitle}
+              style={[styles.titleStyle, headerTitleStyle]}
+              type={CricantoTextTypes.BODY_SMALL}
+            />
+            <TouchableOpacity
+              style={styles.headerBtn}
+              onPress={rightIconAction}>
+              {RightIcon && <RightIcon style={styles.headerBtn} />}
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {isScrollView ? (
+          <ScrollView
+            style={styles.container}
+            ref={scrollViewRef}
+            onContentSizeChange={() =>
+              autoScroll && scrollViewRef.current.scrollToEnd({animated: true})
+            }
+            contentContainerStyle={[containerStyle]}>
+            {children}
+          </ScrollView>
+        ) : (
+          <View style={[styles.container, containerStyle]}>{children}</View>
+        )}
+      </SafeAreaView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+  safeAreaContainer: {
     flex: 1,
   },
   headerContainer: {
@@ -98,7 +114,9 @@ const styles = StyleSheet.create({
 
 export interface IProps {
   RightIcon?: Image;
-  style?: StyleProp<TextStyle>;
+  enableHeader?: boolean;
+  safeAreaStyle?: StyleProp<TextStyle>;
+  headerStyle?: StyleProp<TextStyle>;
   headerTitleStyle?: StyleProp<TextStyle>;
   containerStyle?: StyleProp<TextStyle>;
   headerTitle?: string;

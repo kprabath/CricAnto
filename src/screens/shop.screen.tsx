@@ -75,10 +75,10 @@ const Shop = () => {
   return (
     <CricantoHeader
       RightIcon={Cart}
-      style={styles.headerStyle}
+      enableHeader
+      safeAreaStyle={styles.headerStyle}
+      headerStyle={styles.headerStyle}
       rightIconAction={() => navigation.navigate(CART_SCREEN)}>
-      <SafeAreaView style={{backgroundColor: '#92A3FD'}} />
-      {/* <BackgroundImage width={SCREEN_WIDTH} style={styles.backgroundImage} /> */}
       <LinearGradient
         colors={['#92A3FD', '#9DCEFF']}
         style={{
@@ -272,11 +272,10 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     marginTop: getScaledNumber(15),
-    width: '80%',
+    width: '100%',
   },
   headerStyle: {
-    position: 'absolute',
-    zIndex: 2,
+    backgroundColor: '#92A3FD',
   },
   backgroundImage: {
     position: 'absolute',

@@ -44,6 +44,7 @@ export default () => {
       backKey
       autoScroll
       isScrollView
+      enableHeader
       headerTitleStyle={styles.headerTitle}>
       <LiveEventIndicator />
       <CricantoInput

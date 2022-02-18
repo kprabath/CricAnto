@@ -20,6 +20,7 @@ const Home = () => {
 
   return (
     <CricantoHeader
+      enableHeader
       containerStyle={styles.container}
       headerTitle="Hello James"
       RightIcon={Notification}

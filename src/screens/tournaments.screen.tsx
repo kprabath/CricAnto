@@ -19,6 +19,7 @@ const Home = () => {
 
   return (
     <CricantoHeader
+    enableHeader
       containerStyle={styles.container}
       headerTitle="Tournaments"
       RightIcon={Add}>

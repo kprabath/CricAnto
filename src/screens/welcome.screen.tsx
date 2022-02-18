@@ -2,7 +2,7 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, View} from 'react-native';
 import {CricantoTextTypes} from '../enums';
-import {CricantoText, CricantoButton} from '../components';
+import {CricantoText,CricantoHeader, CricantoButton} from '../components';
 import {getScaledNumber} from '../library/utils';
 import {AUTH_ROUTES} from '../common/constants';
 
@@ -11,7 +11,7 @@ import WelcomeLogo from '../res/images/Welcome.svg';
 const Welcome = () => {
   const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <CricantoHeader enableHeader containerStyle={styles.container}>
       <View style={styles.logoContainer}>
         <WelcomeLogo />
         <CricantoText
@@ -24,7 +24,7 @@ const Welcome = () => {
         onPress={() => navigation.navigate(AUTH_ROUTES)}
         label="Go to Home"
       />
-    </View>
+    </CricantoHeader>
   );
 };
 

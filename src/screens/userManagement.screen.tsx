@@ -20,6 +20,7 @@ const UserManagement = () => {
     <CricantoHeader
       headerTitle="User Management"
       backKey
+      enableHeader
       RightIcon={Menu}
       containerStyle={styles.container}>
       <CricantoInput

@@ -7,21 +7,21 @@
  *
  * @format
  */
-import 'react-native-gesture-handler';
+// import 'react-native-gesture-handler';
 import React from 'react';
 import {StatusBar, StyleSheet, useColorScheme} from 'react-native';
 import AppRoutes from './navigation/appRoutes';
 import Colors from './res/colors';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaProvider style={styles.container}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <AppRoutes />
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

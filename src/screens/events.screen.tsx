@@ -12,6 +12,7 @@ const Event = () => {
 
     return (
         <CricantoHeader
+        enableHeader
             containerStyle={styles.container}
             headerTitle="Events">
             <CricantoInput

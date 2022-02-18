@@ -10,6 +10,7 @@ const Upload = () => {
   return (
     <CricantoHeader
       headerTitle="Upload"
+      enableHeader
       backKey
       RightIcon={Menu}
       containerStyle={styles.container}>

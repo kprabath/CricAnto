@@ -126,7 +126,7 @@ const UserAccount = () => {
     </View>
   );
   return (
-    <CricantoHeader backKey headerTitle="User Management" RightIcon={Menu}>
+    <CricantoHeader enableHeader backKey headerTitle="User Management" RightIcon={Menu}>
       <View style={styles.container}>
         <View style={styles.userContent}>
           <UserDP />

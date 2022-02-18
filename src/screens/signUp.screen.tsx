@@ -3,7 +3,7 @@ import {Link} from '@react-navigation/native';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {CricantoTextTypes} from '../enums';
-import {CricantoText, CricantoInput, CricantoButton} from '../components';
+import {CricantoText,CricantoHeader, CricantoInput, CricantoButton} from '../components';
 import {getScaledNumber} from '../library/utils';
 import colors from '../res/colors';
 
@@ -18,7 +18,7 @@ const SignUp = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <CricantoHeader containerStyle={styles.container}>
       <View style={styles.inputContainer}>
         <CricantoText label="Hey there," type={CricantoTextTypes.BODY_SMALL} />
         <CricantoText
@@ -99,7 +99,7 @@ const SignUp = ({navigation}) => {
           </Link>
         </View>
       </View>
-    </View>
+    </CricantoHeader>
   );
 };
 
