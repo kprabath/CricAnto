@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     marginBottom: getScaledNumber(10),
     width: SCREEN_WIDTH - getScaledNumber(60),
+    alignItems: 'center',
   },
   container: {
     flex: 1,

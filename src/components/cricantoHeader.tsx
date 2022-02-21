@@ -4,6 +4,7 @@ import {CricantoTextTypes} from '../enums';
 import {
   StyleSheet,
   View,
+  Platform,
   TouchableOpacity,
   Image,
   StyleProp,
@@ -36,9 +37,7 @@ const CricantoHeader = ({
   const scrollViewRef = useRef();
   return (
     <>
-      <SafeAreaView
-        style={[styles.safeAreaContainer, safeAreaStyle]}
-      >
+      <SafeAreaView style={[styles.safeAreaContainer, safeAreaStyle]}>
         {enableHeader && (
           <View style={[styles.headerContainer, headerStyle]}>
             <TouchableOpacity
@@ -88,6 +87,8 @@ const styles = StyleSheet.create({
   },
   safeAreaContainer: {
     flex: 1,
+    paddingTop:
+      Platform.OS === 'android' ? getScaledNumber(15) : getScaledNumber(0),
   },
   headerContainer: {
     flexDirection: 'row',

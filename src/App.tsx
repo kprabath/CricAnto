@@ -15,11 +15,9 @@ import Colors from './res/colors';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
     <SafeAreaProvider style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar hidden />
       <AppRoutes />
     </SafeAreaProvider>
   );
