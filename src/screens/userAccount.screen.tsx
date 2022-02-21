@@ -14,13 +14,32 @@ import CheckBox from '@react-native-community/checkbox';
 
 import UserDP from '../res/images/UserDP.svg';
 import Menu from '../res/images/MenuIcon.svg';
+import Success from '../res/images/Success.svg';
 
 import Colors from '../res/colors';
 
 const UserAccount = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [useRoleModal, setUserRoleModal] = useState(false);
   const navigation = useNavigation();
+
+  const successModal = () => (
+    <View style={styles.successModalContainer}>
+      <Success />
+      <CricantoText
+        label="You Susscessfully change 
+          User Role"
+        type={CricantoTextTypes.BODY_SMALL}
+        style={styles.successText}
+      />
+      <CricantoButton
+        label="Continue"
+        containerStyle={styles.btnStyle}
+        onPress={() => setSuccessModalVisible(false)}
+      />
+    </View>
+  );
 
   const modalView = () => (
     <View style={styles.modalContainer}>
@@ -69,7 +88,9 @@ const UserAccount = () => {
       <CricantoButton
         label="Done"
         containerStyle={styles.btnStyle}
-        onPress={() => setModalVisible(false)}
+        onPress={() => {
+          setModalVisible(false), setSuccessModalVisible(true);
+        }}
       />
     </View>
   );
@@ -121,12 +142,18 @@ const UserAccount = () => {
       <CricantoButton
         label="Done"
         containerStyle={styles.btnStyle}
-        onPress={() => setUserRoleModal(false)}
+        onPress={() => {
+          setUserRoleModal(false), setSuccessModalVisible(true);
+        }}
       />
     </View>
   );
   return (
-    <CricantoHeader enableHeader backKey headerTitle="User Management" RightIcon={Menu}>
+    <CricantoHeader
+      enableHeader
+      backKey
+      headerTitle="User Management"
+      RightIcon={Menu}>
       <View style={styles.container}>
         <View style={styles.userContent}>
           <UserDP />
@@ -210,6 +237,9 @@ const UserAccount = () => {
       </View>
       <CricantoModal modalVisible={modalVisible}>{modalView()}</CricantoModal>
       <CricantoModal modalVisible={useRoleModal}>{modalView2()}</CricantoModal>
+      <CricantoModal modalVisible={successModalVisible}>
+        {successModal()}
+      </CricantoModal>
     </CricantoHeader>
   );
 };
@@ -236,12 +266,21 @@ const styles = StyleSheet.create({
     color: Colors.darkGray,
     fontWeight: '600',
   },
+  successText: {
+    marginTop: getScaledNumber(20),
+    marginBottom: getScaledNumber(30),
+  },
   statusValue: {
     color: Colors.cricantoGreen,
     paddingHorizontal: getScaledNumber(20),
   },
   modalContainer: {
     padding: getScaledNumber(30),
+  },
+
+  successModalContainer: {
+    padding: getScaledNumber(30),
+    alignItems: 'center',
   },
   btnStyle: {
     width: '50%',

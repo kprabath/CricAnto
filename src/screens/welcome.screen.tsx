@@ -11,7 +11,7 @@ import WelcomeLogo from '../res/images/Welcome.svg';
 const Welcome = () => {
   const navigation = useNavigation();
   return (
-    <CricantoHeader enableHeader containerStyle={styles.container}>
+    <CricantoHeader containerStyle={styles.container}>
       <View style={styles.logoContainer}>
         <WelcomeLogo />
         <CricantoText
