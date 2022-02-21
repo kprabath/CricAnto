@@ -34,7 +34,7 @@ const DATA = [
 const Cart = () => {
   const navigation = useNavigation();
   return (
-    <CricantoHeader headerTitle="My Cart" backKey>
+    <CricantoHeader enableHeader headerTitle="My Cart" backKey>
       <View style={styles.container}>
         <CricantoText label="Add more products to your cart!" />
         <CricantoInput

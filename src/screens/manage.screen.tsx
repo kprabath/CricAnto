@@ -21,9 +21,9 @@ const Manage = () => {
   const ManageRoutes = () => {
     return (
       <TopTab.Navigator>
-        <TopTab.Screen name="Pending" component={active} />
-        <TopTab.Screen name="Active" component={active} />
-        <TopTab.Screen name="Deleted" component={active} />
+        <TopTab.Screen name="Pending" component={ActiveTab} />
+        <TopTab.Screen name="Active" component={ActiveTab} />
+        <TopTab.Screen name="Deleted" component={ActiveTab} />
       </TopTab.Navigator>
     );
   };
@@ -91,7 +91,7 @@ const Manage = () => {
     </View>
   );
 
-  const active = () => (
+  const ActiveTab = () => (
     <>
       {card()}
       {card()}

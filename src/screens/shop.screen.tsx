@@ -14,7 +14,6 @@ import {CricantoTextTypes} from '../enums';
 import {CricantoHeader, CricantoInput, CricantoText} from '../components';
 import {CART_SCREEN} from '../common/constants';
 
-import BackgroundImage from '../res/images/ShopBackgroundImage';
 import SampleImage from '../res/images/SampleImage1.jpeg';
 import Shoe from '../res/images/Shoe.svg';
 import Bat from '../res/images/Bat.svg';
@@ -23,7 +22,6 @@ import Search from '../res/images/Search.svg';
 import Cart from '../res/images/Cart.svg';
 import SampleProduct from '../res/images/SampleProduct.svg';
 import LinearGradient from 'react-native-linear-gradient';
-import {SafeAreaView} from 'react-native-safe-area-context';
 
 const DATA = [
   {

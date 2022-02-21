@@ -27,6 +27,7 @@ import TournamentsScreen from '../screens/tournaments.screen';
 import EventsScreen from '../screens/events.screen';
 import TournamentDetailScreen from '../screens/tournamentDetail.screen';
 import VideoBufferScreen from '../screens/VideoBuffer.screen';
+import EventDetailScreen from '../screens/eventDetail.screen';
 
 import {
   EVENTS_SCREEN,
@@ -49,6 +50,7 @@ import {
   USER_PROFILE_ROUTES,
   MATCH_STATUS_SCREEN,
   NOTIFICATION_SCREEN,
+  EVENT_DETAIL_SCREEN,
   UPLOAD_SCREEN,
   TOURNAMENTS_SCREEN,
   TOURNAMENTS_DETAIL_SCREEN,
@@ -118,6 +120,19 @@ const UserProfileRoutes = () => {
   );
 };
 
+const EventRoutes = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName={EVENTS_SCREEN}>
+      <Stack.Screen name={EVENTS_SCREEN} component={EventsScreen} />
+      <Stack.Screen name={EVENT_DETAIL_SCREEN} component={EventDetailScreen} />
+    </Stack.Navigator>
+  );
+};
+
 const DrawerNavigator = props => {
   return (
     <Drawer.Navigator
@@ -166,7 +181,7 @@ const TabNavigator = props => {
           tabBarIcon: () => <TabIcon5 />,
         }}
         name={EVENTS_SCREEN}
-        component={EventsScreen}
+        component={EventRoutes}
       />
       <Tab.Screen
         options={{

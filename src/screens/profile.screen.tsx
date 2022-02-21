@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Switch, TouchableOpacity} from 'react-native';
 import {CricantoTextTypes} from '../enums';
 import {getScaledNumber} from '../library/utils';
 import {TICKETS_SCREEN} from '../common/constants';
@@ -13,6 +13,8 @@ import Notification from '../res/images/Notification.svg';
 import Setting from '../res/images/Setting.svg';
 import Graph from '../res/images/Graph.svg';
 import Message from '../res/images/MessageBlue.svg';
+import RightArrow from '../res/images/RightArrow.svg';
+
 import Colors from '../res/colors';
 
 const Profile = () => {
@@ -92,28 +94,37 @@ const Profile = () => {
             style={styles.commonCardText}
           />
           <TouchableOpacity style={styles.commonCardBtn}>
-            <UserProfile />
-            <CricantoText
-              label="Personal Data"
-              type={CricantoTextTypes.BUTTON_LBL}
-              style={styles.commonCardBtnText}
-            />
+            <View style={styles.commonCardLeftContent}>
+              <UserProfile />
+              <CricantoText
+                label="Personal Data"
+                type={CricantoTextTypes.BUTTON_LBL}
+                style={styles.commonCardBtnText}
+              />
+            </View>
+            <RightArrow />
           </TouchableOpacity>
           <TouchableOpacity style={styles.commonCardBtn}>
-            <Graph />
-            <CricantoText
-              label="Activity History"
-              type={CricantoTextTypes.BUTTON_LBL}
-              style={styles.commonCardBtnText}
-            />
+            <View style={styles.commonCardLeftContent}>
+              <Graph />
+              <CricantoText
+                label="Activity History"
+                type={CricantoTextTypes.BUTTON_LBL}
+                style={styles.commonCardBtnText}
+              />
+            </View>
+            <RightArrow />
           </TouchableOpacity>
           <TouchableOpacity style={styles.commonCardBtn}>
-            <Shield />
-            <CricantoText
-              label="Change Password"
-              type={CricantoTextTypes.BUTTON_LBL}
-              style={styles.commonCardBtnText}
-            />
+            <View style={styles.commonCardLeftContent}>
+              <Shield />
+              <CricantoText
+                label="Change Password"
+                type={CricantoTextTypes.BUTTON_LBL}
+                style={styles.commonCardBtnText}
+              />
+            </View>
+            <RightArrow />
           </TouchableOpacity>
         </View>
 
@@ -123,13 +134,17 @@ const Profile = () => {
             type={CricantoTextTypes.H4}
             style={styles.commonCardText}
           />
+
           <TouchableOpacity style={styles.commonCardBtn}>
-            <Notification />
-            <CricantoText
-              label="Pop-up Notification"
-              type={CricantoTextTypes.BUTTON_LBL}
-              style={styles.commonCardBtnText}
-            />
+            <View style={styles.commonCardLeftContent}>
+              <Notification />
+              <CricantoText
+                label="Pop-up Notification"
+                type={CricantoTextTypes.BUTTON_LBL}
+                style={styles.commonCardBtnText}
+              />
+            </View>
+            <Switch style={styles.switchStyle} />
           </TouchableOpacity>
         </View>
 
@@ -140,28 +155,37 @@ const Profile = () => {
             style={styles.commonCardText}
           />
           <TouchableOpacity style={styles.commonCardBtn}>
-            <Message />
-            <CricantoText
-              label="Contact Us"
-              type={CricantoTextTypes.BUTTON_LBL}
-              style={styles.commonCardBtnText}
-            />
+            <View style={styles.commonCardLeftContent}>
+              <Message />
+              <CricantoText
+                label="Contact Us"
+                type={CricantoTextTypes.BUTTON_LBL}
+                style={styles.commonCardBtnText}
+              />
+            </View>
+            <RightArrow />
           </TouchableOpacity>
           <TouchableOpacity style={styles.commonCardBtn}>
-            <Shield />
-            <CricantoText
-              label="Privacy Policy"
-              type={CricantoTextTypes.BUTTON_LBL}
-              style={styles.commonCardBtnText}
-            />
+            <View style={styles.commonCardLeftContent}>
+              <Shield />
+              <CricantoText
+                label="Privacy Policy"
+                type={CricantoTextTypes.BUTTON_LBL}
+                style={styles.commonCardBtnText}
+              />
+            </View>
+            <RightArrow />
           </TouchableOpacity>
           <TouchableOpacity style={styles.commonCardBtn}>
-            <Setting />
-            <CricantoText
-              label="Settings"
-              type={CricantoTextTypes.BUTTON_LBL}
-              style={styles.commonCardBtnText}
-            />
+            <View style={styles.commonCardLeftContent}>
+              <Setting />
+              <CricantoText
+                label="Settings"
+                type={CricantoTextTypes.BUTTON_LBL}
+                style={styles.commonCardBtnText}
+              />
+            </View>
+            <RightArrow />
           </TouchableOpacity>
         </View>
       </View>
@@ -175,10 +199,15 @@ const styles = StyleSheet.create({
     marginHorizontal: getScaledNumber(20),
     marginVertical: getScaledNumber(20),
   },
+  commonCardLeftContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   commonCardBtn: {
     flexDirection: 'row',
     paddingVertical: 6,
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   commonCardBtnText: {
     color: Colors.darkGray,
@@ -208,7 +237,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   ticketBtnText: {
-    fontWeight: '500',
+    fontWeight: '700',
   },
   ticketBtn: {
     backgroundColor: Colors.cricantoLightBlue,
@@ -230,6 +259,9 @@ const styles = StyleSheet.create({
     marginTop: 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  switchStyle: {
+    transform: [{scaleX: 0.7}, {scaleY: 0.7}],
   },
   editBtnContent: {
     height: '100%',

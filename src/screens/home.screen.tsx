@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, View, Switch, TouchableOpacity} from 'react-native';
 import {CricantoTextTypes} from '../enums';
-import {getScaledNumber} from '../library/utils';
+import {getScaledNumber, SCREEN_HEIGHT, SCREEN_WIDTH} from '../library/utils';
 import {NOTIFICATION_SCREEN, UPLOAD_SCREEN} from '../common/constants';
 import {CricantoHeader, CricantoText} from '../components';
 
@@ -12,6 +12,7 @@ import Ticket from '../res/images/Ticket.svg';
 import Notification from '../res/images/NotificationIcon.svg';
 import Add from '../res/images/AddIcon.svg';
 import Banner from '../res/images/NoticeBanner.svg';
+import LinearGradient from 'react-native-linear-gradient';
 
 import Colors from '../res/colors';
 
@@ -36,13 +37,20 @@ const Home = () => {
 
         <Add />
       </TouchableOpacity>
-
-      <Banner />
+      <LinearGradient
+        colors={['#92A3FD', '#9DCEFF']}
+        style={{
+          height: SCREEN_HEIGHT * 0.2,
+          width: '100%',
+          marginVertical: getScaledNumber(15),
+          borderRadius: getScaledNumber(20),
+        }}
+      />
       <View style={styles.topEventsContent}>
         <CricantoText
           style={styles.eventText}
           label="Top Events"
-          type={CricantoTextTypes.BODY_SMALL}
+          type={CricantoTextTypes.H4}
         />
         <View style={styles.liveContent}>
           <CricantoText
@@ -50,7 +58,7 @@ const Home = () => {
             label="LIVE"
             type={CricantoTextTypes.BODY_SMALL}
           />
-          <Switch ios_backgroundColor="#800000" />
+          <Switch ios_backgroundColor="#800000" style={styles.switchStyle} />
         </View>
       </View>
       <CricantoText
@@ -83,6 +91,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: getScaledNumber(10),
   },
+  switchStyle: {
+    transform: [{scaleX: 0.7}, {scaleY: 0.7}],
+  },
   scoreContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -106,6 +117,7 @@ const styles = StyleSheet.create({
   activityStatusText: {
     fontWeight: '600',
     color: Colors.darkGray,
+    alignSelf: 'flex-start',
     marginVertical: getScaledNumber(15),
   },
   statusContainer: {
@@ -121,7 +133,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: getScaledNumber(15),
+    paddingVertical: getScaledNumber(10),
     borderRadius: getScaledNumber(16),
     paddingHorizontal: getScaledNumber(10),
     backgroundColor: Colors.cricantoLightPurple,
