@@ -74,6 +74,7 @@ const Shop = () => {
     <CricantoHeader
       RightIcon={Cart}
       enableHeader
+      disableBottomPadding
       safeAreaStyle={styles.headerStyle}
       headerStyle={styles.headerStyle}
       rightIconAction={() => navigation.navigate(CART_SCREEN)}>

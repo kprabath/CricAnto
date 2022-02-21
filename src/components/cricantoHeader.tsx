@@ -28,6 +28,7 @@ const CricantoHeader = ({
   containerStyle,
   backKey,
   rightIconAction,
+  disableBottomPadding,
   headerTitleStyle,
   children,
   isScrollView,
@@ -37,7 +38,13 @@ const CricantoHeader = ({
   const scrollViewRef = useRef();
   return (
     <>
-      <SafeAreaView style={[styles.safeAreaContainer, safeAreaStyle]}>
+      <SafeAreaView
+        edges={
+          disableBottomPadding
+            ? ['top', 'right', 'left']
+            : ['top', 'bottom', 'right', 'left']
+        }
+        style={[styles.safeAreaContainer, safeAreaStyle]}>
         {enableHeader && (
           <View style={[styles.headerContainer, headerStyle]}>
             <TouchableOpacity
@@ -115,6 +122,7 @@ const styles = StyleSheet.create({
 
 export interface IProps {
   RightIcon?: Image;
+  disableBottomPadding?: boolean;
   enableHeader?: boolean;
   safeAreaStyle?: StyleProp<TextStyle>;
   headerStyle?: StyleProp<TextStyle>;
