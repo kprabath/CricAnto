@@ -26,3 +26,11 @@ export const VIDEO_STREAM_SCREEN = 'VIDEO_STREAM_SCREEN';
 
 export const AUTH_ROUTES = 'AUTH_ROUTES';
 export const USER_PROFILE_ROUTES = 'USER_PROFILE_ROUTES';
+
+// common actions
+export const START_LOADING = 'START_LOADING';
+export const END_LOADING = 'END_LOADING';
+
+// user actions
+export const USER_REGISTER = 'USER_REGISTER';
+export const USER_LOGIN = 'USER_LOGIN';

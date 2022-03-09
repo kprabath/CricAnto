@@ -13,13 +13,20 @@ import {StatusBar, StyleSheet, useColorScheme} from 'react-native';
 import AppRoutes from './navigation/appRoutes';
 import Colors from './res/colors';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistor, store} from './store/store';
 
 const App = () => {
   return (
-    <SafeAreaProvider style={styles.container}>
-      <StatusBar hidden />
-      <AppRoutes />
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <SafeAreaProvider style={styles.container}>
+          <StatusBar hidden />
+          <AppRoutes />
+        </SafeAreaProvider>
+      </PersistGate>
+    </Provider>
   );
 };
 

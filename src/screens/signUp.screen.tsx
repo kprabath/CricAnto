@@ -1,9 +1,15 @@
 import React, {useState} from 'react';
 import {Link} from '@react-navigation/native';
+import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {CricantoTextTypes} from '../enums';
-import {CricantoText,CricantoHeader, CricantoInput, CricantoButton} from '../components';
+import {
+  CricantoText,
+  CricantoHeader,
+  CricantoInput,
+  CricantoButton,
+} from '../components';
 import {getScaledNumber} from '../library/utils';
 import colors from '../res/colors';
 
@@ -14,9 +20,16 @@ import Lock from '../res/images/Lock.svg';
 import Google from '../res/images/Google.svg';
 import CricantoIcon from '../res/images/CricantoIcon.svg';
 import Facebook from '../res/images/Facebook.svg';
+
+import {userRegister} from '../actions/user.actions';
+
 const SignUp = ({navigation}) => {
+  const dispatch = useDispatch();
   const [isSelected, setSelection] = useState(false);
 
+  const register = () => {
+    dispatch(userRegister());
+  };
   return (
     <CricantoHeader containerStyle={styles.container}>
       <View style={styles.inputContainer}>
@@ -66,7 +79,8 @@ const SignUp = ({navigation}) => {
       <View style={styles.bottomContainer}>
         <CricantoButton
           label="Register"
-          onPress={() => navigation.navigate(LOGIN_SCREEN)}
+          onPress={register}
+          // onPress={() => navigation.navigate(LOGIN_SCREEN)}
         />
         <CricantoText
           label="Or"
