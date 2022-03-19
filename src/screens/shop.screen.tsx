@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     alignItems: 'center',
     marginHorizontal: getScaledNumber(30),
-    marginVertical: getScaledNumber(20),
+    marginVertical: getScaledNumber(15),
     justifyContent: 'space-evenly',
   },
   price: {
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.cricantoLightGray,
     flexDirection: 'column',
     flex: 1,
-    paddingVertical: getScaledNumber(20),
+    paddingTop: getScaledNumber(10),
     paddingHorizontal: getScaledNumber(10),
   },
   itemContent: {
@@ -268,6 +268,11 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: getScaledNumber(20),
     flexDirection: 'row',
+    shadowColor: Colors.shadowColor,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
   },
   searchInput: {
     marginTop: getScaledNumber(15),

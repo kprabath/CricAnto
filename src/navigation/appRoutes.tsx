@@ -39,6 +39,7 @@ import {
   WELCOME_SCREEN,
   CONTRIBUTION_SUCCESS_SCREEN,
   AUTH_ROUTES,
+  TAB_ROUTES,
   MANAGE_SCREEN,
   CONTRIBUTION_SCREEN,
   PROFILE_SCREEN,
@@ -130,13 +131,14 @@ const EventRoutes = () => {
 const DrawerNavigator = props => {
   return (
     <Drawer.Navigator
+      useLegacyImplementation={false}
       screenOptions={{
         headerStyle: {backgroundColor: Colors.white},
         // headerTitle: 'Profile',
         headerShown: false,
       }}
       drawerContent={props => <CustomeSideMenu {...props} />}>
-      <Drawer.Screen name={AUTH_ROUTES} component={TabNavigator} />
+      <Drawer.Screen name={TAB_ROUTES} component={TabNavigator} />
       <Drawer.Screen
         name={CONTRIBUTION_SCREEN}
         component={ContributionScreen}
@@ -193,7 +195,6 @@ const TabNavigator = props => {
       <Tab.Screen
         options={{
           tabBarIcon: () => <TabIcon4 />,
-          headerTitle: 'hh',
         }}
         name={SHOP_SCREEN}
         component={ShopScreen}

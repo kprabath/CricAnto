@@ -1,8 +1,10 @@
-import Axios, {AxiosRequestConfig} from 'axios';
 
-import {store} from 'store';
+import Axios, {AxiosRequestConfig} from 'axios';
+import {store} from '../store/store';
+import {startLoading, endLoading} from '../actions/common.action';
 
 const BASE_URL = 'https://cricketchampx.com/v1/api';
+
 interface IRequest {
   url?: string;
   data?: object;
@@ -44,8 +46,7 @@ const request = ({
   headers: addHeaders,
 }: IRequest) =>
   new Promise((resolve, reject) => {
-    //  store.dispatch(toggleLoader({ action: 'start', loader, hideLoader }));
-
+    store.dispatch(startLoading());
     // const { user, common } = store.getState() as Reducers;
     const headers = {
       'Content-Type': 'application/json',
@@ -64,12 +65,12 @@ const request = ({
 
     Axios(axiosConfig)
       .then(response => {
-        console.log(response, '555');
         resolve(response.data);
-        // store.dispatch(toggleLoader({action: 'stop', loader}));
+        store.dispatch(endLoading());
       })
       .catch(error => {
         // console.log(error?.response?.data || error, '333');
+        store.dispatch(endLoading());
         reject(error?.response?.data || error);
       });
   });

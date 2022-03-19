@@ -4,6 +4,7 @@ import CricantoInput from './cricantoInput';
 import CricantoButton from './cricantoButton';
 import CricantoCartItem from './cricantoCartItem';
 import CricantoModal from './cricantoModal';
+import CricantoLoader from './CricantoLoader';
 
 export {
   CricantoText,
@@ -12,4 +13,5 @@ export {
   CricantoInput,
   CricantoButton,
   CricantoModal,
+  CricantoLoader,
 };

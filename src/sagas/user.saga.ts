@@ -9,10 +9,10 @@ export function* userRegister() {
   try {
     const payload = {
       name: 'test',
-      email: 'test@gmail.com',
+      email: 'test1@gmail.com',
       password: 'test!123',
       password_confirmation: 'test!123',
-      mobile: '+94777123456',
+      mobile: '+94777123446',
     };
     const data = yield call(UserAPi.signUpAPI, payload);
     console.log(data, '111');

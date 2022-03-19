@@ -212,6 +212,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: '100%',
     backgroundColor: '#37D4A5',
+    shadowColor: Colors.shadowColor,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
   },
   successText: {
     fontWeight: '700',
@@ -230,6 +235,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: '100%',
     backgroundColor: '#37CBD4',
+    shadowColor: Colors.shadowColor,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
   },
   card3: {
     paddingVertical: getScaledNumber(10),
@@ -237,6 +247,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: '100%',
     backgroundColor: '#BED437',
+    shadowColor: Colors.shadowColor,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
   },
 
   cardText: {

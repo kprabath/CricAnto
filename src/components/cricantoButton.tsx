@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
   },
   btn: {
     width: '100%',
+    shadowColor: colors.shadowColor,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
   },
   btnText: {
     fontWeight: '700',

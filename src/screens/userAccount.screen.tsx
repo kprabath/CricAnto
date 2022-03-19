@@ -322,8 +322,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    backgroundColor: Colors.gray98,
-    // backgroundColor:'red'
+    backgroundColor: Colors.white,
+    shadowColor: Colors.shadowColor,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
   },
   userDetailsContent: {
     marginTop: getScaledNumber(20),

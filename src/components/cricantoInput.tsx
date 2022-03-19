@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, TextInput, Image} from 'react-native';
 import colors from '../res/colors';
 
-const CricantoInput = ({placeholder, Icon, style}: IProps) => {
+const CricantoInput = ({placeholder, Icon, style,setState,value}: IProps) => {
   return (
     <View style={[styles.container, style]}>
       <View style={Icon ? styles.sectionStyle : styles.sectionStyleWithoutIcon}>
@@ -10,6 +10,8 @@ const CricantoInput = ({placeholder, Icon, style}: IProps) => {
 
         <TextInput
           style={{flex: 1}}
+          onChangeText={setState}
+          value={value}
           placeholder={placeholder}
           underlineColorAndroid="transparent"
         />
@@ -52,6 +54,8 @@ const styles = StyleSheet.create({
 
 export interface IProps {
   placeholder?: string;
+  setState?: Function;
+  value?: string;
   Icon?: Image;
   style?: StyleProp<TextStyle>;
 }

@@ -16,6 +16,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistor, store} from './store/store';
+import {CricantoLoader} from './components';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <SafeAreaProvider style={styles.container}>
           <StatusBar hidden />
           <AppRoutes />
+          <CricantoLoader />
         </SafeAreaProvider>
       </PersistGate>
     </Provider>

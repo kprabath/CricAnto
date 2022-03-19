@@ -1,10 +1,11 @@
 import Api from './api';
 
 export default class UserAPI {
-  static signUpAPI = () =>
+  static signUpAPI = data =>
     Api.request({
       method: 'post',
       action: '/auth/signup',
+      data,
     });
 
   // static getAccountDataApi = () =>

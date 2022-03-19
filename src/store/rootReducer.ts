@@ -5,16 +5,28 @@ import commonReducer from './commonReducer';
 import authReducer from './authReducer';
 // import userReducer from './userReducer';
 
-const rootPersistConfig = {
-  key: 'root',
+const commonConfig = {
+  key: 'common',
   storage: AsyncStorage,
-  blacklist: ['common', 'user'],
+  blacklist: ['loading'],
 };
 
+const authConfig = {
+  key: 'auth',
+  storage: AsyncStorage,
+  //blacklist: ['common', 'user'],
+};
+
+// const userConfig = {
+//   key: 'user',
+//   storage: AsyncStorage,
+//   whitelist: ['userId'], // only userId will be persisted
+// };
+
 const rootReducer = combineReducers({
-  common: persistReducer(rootPersistConfig, commonReducer),
-  auth: persistReducer(rootPersistConfig, authReducer),
-  //user: persistReducer(rootPersistConfig, userReducer),
+  common: persistReducer(commonConfig, commonReducer),
+  auth: persistReducer(authConfig, authReducer),
+  // user: persistReducer(userConfig, userReducer),
 });
 
 export default rootReducer;

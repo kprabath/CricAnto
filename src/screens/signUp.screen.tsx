@@ -26,6 +26,7 @@ import {userRegister} from '../actions/user.actions';
 const SignUp = ({navigation}) => {
   const dispatch = useDispatch();
   const [isSelected, setSelection] = useState(false);
+ // const [isSelected, setSelection] = useState(false);
 
   const register = () => {
     dispatch(userRegister());
@@ -79,7 +80,7 @@ const SignUp = ({navigation}) => {
       <View style={styles.bottomContainer}>
         <CricantoButton
           label="Register"
-          onPress={register}
+           onPress={register}
           // onPress={() => navigation.navigate(LOGIN_SCREEN)}
         />
         <CricantoText
