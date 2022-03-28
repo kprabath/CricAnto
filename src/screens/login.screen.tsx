@@ -1,12 +1,20 @@
 import React, {useState} from 'react';
 import {Link} from '@react-navigation/native';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Alert} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {CricantoTextTypes} from '../enums';
-import {CricantoText,CricantoHeader, CricantoInput, CricantoButton} from '../components';
+import {
+  CricantoText,
+  CricantoHeader,
+  CricantoInput,
+  CricantoButton,
+} from '../components';
 import {getScaledNumber} from '../library/utils';
 import colors from '../res/colors';
 import {SIGN_UP_SCREEN, WELCOME_SCREEN} from '../common/constants';
+import {useDispatch} from 'react-redux';
+
+import {userLogin} from '../actions/user.actions';
 
 import Message from '../res/images/Message.svg';
 import Lock from '../res/images/Lock.svg';
@@ -15,7 +23,30 @@ import CricantoIcon from '../res/images/CricantoIcon.svg';
 import Facebook from '../res/images/Facebook.svg';
 
 const Login = ({navigation}) => {
+  const dispatch = useDispatch();
   const [isSelected, setSelection] = useState(false);
+  const [password, setPassword] = useState(String);
+  const [username, setUsername] = useState(String);
+
+  const isButtonDisabled = password.length === 0 || username.length === 0;
+
+  const sumbit = () => {
+    const data = {
+      password,
+      username,
+    };
+    dispatch(
+      userLogin(
+        data,
+        message => {
+          Alert.alert('Success', message, [{text: 'OK', onPress: () => {}}]);
+        },
+        error => {
+          Alert.alert('Error', error, [{text: 'OK', onPress: () => {}}]);
+        },
+      ),
+    );
+  };
 
   return (
     <CricantoHeader containerStyle={styles.container}>
@@ -28,13 +59,18 @@ const Login = ({navigation}) => {
         />
         <CricantoInput
           style={styles.commonInput}
-          placeholder="Email"
+          placeholder="Username"
           Icon={Message}
+          setState={setUsername}
+          value={username}
         />
         <CricantoInput
           style={styles.commonInput}
           placeholder="Password"
           Icon={Lock}
+          isProtected
+          setState={setPassword}
+          value={password}
         />
 
         <View style={styles.checkboxContainer}>
@@ -55,7 +91,8 @@ const Login = ({navigation}) => {
       <View style={styles.bottomContainer}>
         <CricantoButton
           label="Login"
-          onPress={() => navigation.navigate(WELCOME_SCREEN)}
+          disabled={isButtonDisabled}
+          onPress={sumbit}
         />
         <CricantoText
           label="Or"
@@ -76,12 +113,12 @@ const Login = ({navigation}) => {
         </View>
         <View style={styles.bottomTextContent}>
           <CricantoText
-            label="Already have an account? "
+            label="Don’t have an account yet? "
             type={CricantoTextTypes.HINT}
           />
           <Link to={{screen: SIGN_UP_SCREEN}}>
             <CricantoText
-              label=" Login"
+              label="Register"
               type={CricantoTextTypes.HINT}
               style={styles.bottomTextStyle}
             />

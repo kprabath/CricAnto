@@ -2,7 +2,14 @@ import React from 'react';
 import {StyleSheet, View, TextInput, Image} from 'react-native';
 import colors from '../res/colors';
 
-const CricantoInput = ({placeholder, Icon, style,setState,value}: IProps) => {
+const CricantoInput = ({
+  placeholder,
+  Icon,
+  style,
+  setState,
+  value,
+  isProtected,
+}: IProps) => {
   return (
     <View style={[styles.container, style]}>
       <View style={Icon ? styles.sectionStyle : styles.sectionStyleWithoutIcon}>
@@ -12,6 +19,8 @@ const CricantoInput = ({placeholder, Icon, style,setState,value}: IProps) => {
           style={{flex: 1}}
           onChangeText={setState}
           value={value}
+          autoCapitalize="none"
+          secureTextEntry={isProtected && true}
           placeholder={placeholder}
           underlineColorAndroid="transparent"
         />
@@ -57,6 +66,7 @@ export interface IProps {
   setState?: Function;
   value?: string;
   Icon?: Image;
+  isProtected?: boolean;
   style?: StyleProp<TextStyle>;
 }
 

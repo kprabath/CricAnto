@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Alert} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {CricantoTextTypes} from '../enums';
 import {
@@ -26,13 +26,47 @@ import {userRegister} from '../actions/user.actions';
 const SignUp = ({navigation}) => {
   const dispatch = useDispatch();
   const [isSelected, setSelection] = useState(false);
- // const [isSelected, setSelection] = useState(false);
+  const [firstName, setFirstname] = useState(String);
+  const [lastName, setLastname] = useState(String);
+  const [password, setPassword] = useState(String);
+  const [userName, setUsername] = useState(String);
+  const [email, setEmail] = useState(String);
+  const [address, setAddress] = useState(String);
+  const [phoneNumber, setPhoneNumber] = useState(String);
+
+  const isButtonDisabled =
+    firstName.length === 0 ||
+    lastName.length === 0 ||
+    email.length === 0 ||
+    password.length === 0 ||
+    userName.length === 0 ||
+    phoneNumber.length === 0 ||
+    address.length === 0;
 
   const register = () => {
-    dispatch(userRegister());
+    const data = {
+      firstName,
+      lastName,
+      email,
+      address,
+      phoneNumber,
+      password,
+      userName,
+    };
+    dispatch(
+      userRegister(
+        data,
+        message => {
+          Alert.alert('Success', message, [{text: 'OK', onPress: () => {}}]);
+        },
+        error => {
+          Alert.alert('Error', error, [{text: 'OK', onPress: () => {}}]);
+        },
+      ),
+    );
   };
   return (
-    <CricantoHeader containerStyle={styles.container}>
+    <CricantoHeader isScrollView containerStyle={styles.container}>
       <View style={styles.inputContainer}>
         <CricantoText label="Hey there," type={CricantoTextTypes.BODY_SMALL} />
         <CricantoText
@@ -40,25 +74,57 @@ const SignUp = ({navigation}) => {
           type={CricantoTextTypes.H3}
           style={styles.title}
         />
+
         <CricantoInput
           style={styles.firstNameInput}
           placeholder="First Name"
           Icon={User}
+          value={firstName}
+          setState={setFirstname}
         />
         <CricantoInput
           style={styles.commonInput}
           placeholder="Last Name"
           Icon={User}
+          value={lastName}
+          setState={setLastname}
+        />
+        <CricantoInput
+          style={styles.commonInput}
+          placeholder="Username"
+          Icon={User}
+          value={userName}
+          setState={setUsername}
+        />
+
+        <CricantoInput
+          style={styles.commonInput}
+          placeholder="Address"
+          Icon={Message}
+          value={address}
+          setState={setAddress}
         />
         <CricantoInput
           style={styles.commonInput}
           placeholder="Email"
           Icon={Message}
+          value={email}
+          setState={setEmail}
+        />
+        <CricantoInput
+          style={styles.commonInput}
+          placeholder="Phone Number"
+          Icon={Message}
+          value={phoneNumber}
+          setState={setPhoneNumber}
         />
         <CricantoInput
           style={styles.commonInput}
           placeholder="Password"
           Icon={Lock}
+          isProtected
+          value={password}
+          setState={setPassword}
         />
 
         <View style={styles.checkboxContainer}>
@@ -80,7 +146,8 @@ const SignUp = ({navigation}) => {
       <View style={styles.bottomContainer}>
         <CricantoButton
           label="Register"
-           onPress={register}
+          onPress={register}
+          disabled={isButtonDisabled}
           // onPress={() => navigation.navigate(LOGIN_SCREEN)}
         />
         <CricantoText
@@ -120,7 +187,6 @@ const SignUp = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     marginHorizontal: getScaledNumber(30),
     marginVertical: getScaledNumber(20),
@@ -159,7 +225,8 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: getScaledNumber(20),
+    marginBottom: getScaledNumber(20),
     justifyContent: 'center',
     alignItems: 'center',
     maxWidth: '96%',
@@ -182,10 +249,10 @@ const styles = StyleSheet.create({
     marginTop: getScaledNumber(5),
   },
   firstNameInput: {
-    marginTop: getScaledNumber(30),
+    marginTop: getScaledNumber(20),
   },
   commonInput: {
-    marginTop: getScaledNumber(15),
+    marginTop: getScaledNumber(10),
   },
 });
 

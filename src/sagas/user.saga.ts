@@ -1,30 +1,31 @@
 import {put, takeEvery, call, select} from 'redux-saga/effects';
-import {START_LOADING, END_LOADING, USER_REGISTER} from '../common/constants';
+import {USER_REGISTER, USER_LOGIN} from '../common/constants';
 
 import UserAPi from '../apis/user.api';
 
-export function* userRegister() {
-  yield put({type: START_LOADING});
-  console.log('fffff');
+export function* userRegister({payload, success, failed}) {
   try {
-    const payload = {
-      name: 'test',
-      email: 'test1@gmail.com',
-      password: 'test!123',
-      password_confirmation: 'test!123',
-      mobile: '+94777123446',
-    };
     const data = yield call(UserAPi.signUpAPI, payload);
-    console.log(data, '111');
-    yield put({type: END_LOADING});
+    success(data.message);
   } catch (error) {
-    console.log(error, 'ggg');
-    yield put({type: END_LOADING});
+    failed(error.error);
+  }
+}
+
+export function* userLogin({payload, success, failed}) {
+  try {
+    const data = yield call(UserAPi.logInAPI, payload);
+    console.log(data,"fff");
+    success(data.message);
+  } catch (error) {
+    console.log(error,"rrfff");
+    failed(error.message);
   }
 }
 
 function* userSaga() {
   yield takeEvery(USER_REGISTER, userRegister);
+  yield takeEvery(USER_LOGIN, userLogin);
 }
 
 export default userSaga;

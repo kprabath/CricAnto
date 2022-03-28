@@ -1,9 +1,8 @@
-
 import Axios, {AxiosRequestConfig} from 'axios';
 import {store} from '../store/store';
 import {startLoading, endLoading} from '../actions/common.action';
 
-const BASE_URL = 'https://cricketchampx.com/v1/api';
+const BASE_URL = 'https://cricanto-backend.herokuapp.com/';
 
 interface IRequest {
   url?: string;

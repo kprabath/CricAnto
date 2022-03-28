@@ -4,15 +4,14 @@ export default class UserAPI {
   static signUpAPI = data =>
     Api.request({
       method: 'post',
-      action: '/auth/signup',
+      action: 'register',
       data,
     });
 
-  // static getAccountDataApi = () =>
-  //   Api.request({
-  //     method: 'get',
-  //     action: ACCOUNT_BALANCE,
-  //     apiVersion: apiVersionEnums.V1,
-  //     appType: appTypeEnums.SA,
-  //   });
+  static logInAPI = data =>
+    Api.request({
+      method: 'post',
+      action: 'login',
+      data,
+    });
 }
