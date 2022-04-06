@@ -23,6 +23,7 @@ export const EVENTS_SCREEN = 'EVENTS_SCREEN';
 export const EVENT_DETAIL_SCREEN = 'EVENTS_DETAIL_SCREEN';
 export const TOURNAMENTS_DETAIL_SCREEN = 'TOURNAMENTS/DETAILSCREEN';
 export const VIDEO_STREAM_SCREEN = 'VIDEO_STREAM_SCREEN';
+export const OTP_SCREEN = 'OTP_SCREEN';
 
 export const AUTH_ROUTES = 'AUTH_ROUTES';
 export const TAB_ROUTES = 'TAB_ROUTES';
@@ -35,3 +36,4 @@ export const END_LOADING = 'END_LOADING';
 // user actions
 export const USER_REGISTER = 'USER_REGISTER';
 export const USER_LOGIN = 'USER_LOGIN';
+export const SEND_OTP = 'SEND_OTP';

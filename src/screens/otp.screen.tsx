@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {Link} from '@react-navigation/native';
-import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, View, TouchableOpacity, Alert} from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+import {useDispatch} from 'react-redux';
+import {Alert,StyleSheet, View, TouchableOpacity} from 'react-native';
 import {CricantoTextTypes} from '../enums';
 import {
   CricantoText,
@@ -13,7 +13,7 @@ import {
 import {getScaledNumber} from '../library/utils';
 import colors from '../res/colors';
 
-import {OTP_SCREEN,LOGIN_SCREEN} from '../common/constants';
+import {LOGIN_SCREEN} from '../common/constants';
 import User from '../res/images/User.svg';
 import Message from '../res/images/Message.svg';
 import Lock from '../res/images/Lock.svg';
@@ -21,131 +21,55 @@ import Google from '../res/images/Google.svg';
 import CricantoIcon from '../res/images/CricantoIcon.svg';
 import Facebook from '../res/images/Facebook.svg';
 
-import {userRegister} from '../actions/user.actions';
+import {sendOTP, userRegister} from '../actions/user.actions';
 
-const SignUp = ({navigation}) => {
+const Otp = ({navigation}) => {
   const dispatch = useDispatch();
-  const [isSelected, setSelection] = useState(false);
-  const [firstName, setFirstname] = useState(String);
-  const [lastName, setLastname] = useState(String);
-  const [password, setPassword] = useState(String);
-  const [userName, setUsername] = useState(String);
-  const [email, setEmail] = useState(String);
-  const [address, setAddress] = useState(String);
-  const [phoneNumber, setPhoneNumber] = useState(String);
-
-  const isButtonDisabled =
-    firstName.length === 0 ||
-    lastName.length === 0 ||
-    email.length === 0 ||
-    password.length === 0 ||
-    userName.length === 0 ||
-    phoneNumber.length === 0 ||
-    address.length === 0;
-
+  const [verificationCode, setVerificationCode] = useState(String);
+  const {
+    params: {userName},
+  } = useRoute();
+  const isButtonDisabled = verificationCode.length === 0;
   const register = () => {
     const data = {
-      firstName,
-      lastName,
-      email,
-      address,
-      phoneNumber,
-      password,
       userName,
+      verificationCode,
     };
+
+    console.log(data, 'rrrr');
     dispatch(
-      userRegister(
+      sendOTP(
         data,
         () => {
-          navigation.navigate(OTP_SCREEN, {userName});
+          navigation.navigate(LOGIN_SCREEN);
         },
-        error => {
-          Alert.alert('Error', error, [{text: 'OK', onPress: () => {}}]);
+        () => {
+          Alert.alert('Error', 'OTP Failed', [{text: 'OK', onPress: () => {}}]);
         },
       ),
     );
   };
   return (
-    <CricantoHeader isScrollView containerStyle={styles.container}>
+    <CricantoHeader containerStyle={styles.container}>
       <View style={styles.inputContainer}>
         <CricantoText label="Hey there," type={CricantoTextTypes.BODY_SMALL} />
         <CricantoText
-          label="Create an Account"
+          label="Enter OTP"
           type={CricantoTextTypes.H3}
           style={styles.title}
         />
 
         <CricantoInput
-          style={styles.firstNameInput}
-          placeholder="First Name"
-          Icon={User}
-          value={firstName}
-          setState={setFirstname}
-        />
-        <CricantoInput
-          style={styles.commonInput}
-          placeholder="Last Name"
-          Icon={User}
-          value={lastName}
-          setState={setLastname}
-        />
-        <CricantoInput
-          style={styles.commonInput}
-          placeholder="Username"
-          Icon={User}
-          value={userName}
-          setState={setUsername}
-        />
-
-        <CricantoInput
-          style={styles.commonInput}
-          placeholder="Address"
+          style={styles.otpInput}
+          placeholder="OTP"
           Icon={Message}
-          value={address}
-          setState={setAddress}
+          value={verificationCode}
+          setState={setVerificationCode}
         />
-        <CricantoInput
-          style={styles.commonInput}
-          placeholder="Email"
-          Icon={Message}
-          value={email}
-          setState={setEmail}
-        />
-        <CricantoInput
-          style={styles.commonInput}
-          placeholder="Phone Number"
-          Icon={Message}
-          value={phoneNumber}
-          setState={setPhoneNumber}
-        />
-        <CricantoInput
-          style={styles.commonInput}
-          placeholder="Password"
-          Icon={Lock}
-          isProtected
-          value={password}
-          setState={setPassword}
-        />
-
-        <View style={styles.checkboxContainer}>
-          <CheckBox
-            boxType="square"
-            lineWidth={1.0}
-            value={isSelected}
-            onValueChange={setSelection}
-            style={styles.checkbox}
-          />
-
-          <CricantoText
-            label="By continuing you accept our Privacy Policy and Term of Use"
-            type={CricantoTextTypes.BUTTON_LBL}
-            style={styles.checkBoxTextStyle}
-          />
-        </View>
       </View>
       <View style={styles.bottomContainer}>
         <CricantoButton
-          label="Register"
+          label="SUBMIT"
           onPress={register}
           disabled={isButtonDisabled}
           // onPress={() => navigation.navigate(LOGIN_SCREEN)}
@@ -212,6 +136,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     alignItems: 'center',
+    flex: 1,
   },
   bottomTextContent: {
     flexDirection: 'row',
@@ -248,12 +173,12 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     marginTop: getScaledNumber(5),
   },
-  firstNameInput: {
-    marginTop: getScaledNumber(20),
+  otpInput: {
+    marginTop: getScaledNumber(100),
   },
   commonInput: {
     marginTop: getScaledNumber(10),
   },
 });
 
-export default SignUp;
+export default Otp;

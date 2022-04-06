@@ -1,4 +1,4 @@
-import {USER_LOGIN, USER_REGISTER} from '../common/constants';
+import {USER_LOGIN,SEND_OTP, USER_REGISTER} from '../common/constants';
 
 export const userLogin = (
   payload: Object,
@@ -17,6 +17,17 @@ export const userRegister = (
   failed: Function,
 ) => ({
   type: USER_REGISTER,
+  payload,
+  success,
+  failed,
+});
+
+export const sendOTP = (
+  payload: Object,
+  success: Function,
+  failed: Function,
+) => ({
+  type: SEND_OTP,
   payload,
   success,
   failed,

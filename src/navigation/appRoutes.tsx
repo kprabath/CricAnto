@@ -28,6 +28,7 @@ import EventsScreen from '../screens/events.screen';
 import TournamentDetailScreen from '../screens/tournamentDetail.screen';
 import VideoBufferScreen from '../screens/VideoBuffer.screen';
 import EventDetailScreen from '../screens/eventDetail.screen';
+import OTPScreen from '../screens/otp.screen';
 
 import {
   EVENTS_SCREEN,
@@ -45,6 +46,7 @@ import {
   PROFILE_SCREEN,
   TICKETS_SCREEN,
   MEMBERSHIP_SCREEN,
+  OTP_SCREEN,
   SHOP_SCREEN,
   CART_SCREEN,
   HOME_SCREEN,
@@ -221,6 +223,11 @@ const AppRoutes = () => {
           options={{headerShown: false}}
           name={SIGN_UP_SCREEN}
           component={SignUpScreen}
+        />
+           <Stack.Screen
+          options={{headerShown: false}}
+          name={OTP_SCREEN}
+          component={OTPScreen}
         />
         <Stack.Screen name={LOGIN_SCREEN} component={LoginScreen} />
         <Stack.Screen name={WELCOME_SCREEN} component={WelcomeScreen} />

@@ -14,4 +14,11 @@ export default class UserAPI {
       action: 'login',
       data,
     });
+
+  static sendOTPAPI = data =>
+    Api.request({
+      method: 'post',
+      action: 'register/verify',
+      data,
+    });
 }
