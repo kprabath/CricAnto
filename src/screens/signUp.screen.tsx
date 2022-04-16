@@ -13,7 +13,7 @@ import {
 import {getScaledNumber} from '../library/utils';
 import colors from '../res/colors';
 
-import {OTP_SCREEN,LOGIN_SCREEN} from '../common/constants';
+import {OTP_SCREEN, LOGIN_SCREEN} from '../common/constants';
 import User from '../res/images/User.svg';
 import Message from '../res/images/Message.svg';
 import Lock from '../res/images/Lock.svg';
@@ -56,8 +56,8 @@ const SignUp = ({navigation}) => {
     dispatch(
       userRegister(
         data,
-        () => {
-          navigation.navigate(OTP_SCREEN, {userName});
+        token => {
+          navigation.navigate(OTP_SCREEN, {userName, token});
         },
         error => {
           Alert.alert('Error', error, [{text: 'OK', onPress: () => {}}]);

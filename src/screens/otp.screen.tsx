@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {Link} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
-import {Alert,StyleSheet, View, TouchableOpacity} from 'react-native';
+import {Alert, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {CricantoTextTypes} from '../enums';
 import {
   CricantoText,
@@ -27,16 +27,16 @@ const Otp = ({navigation}) => {
   const dispatch = useDispatch();
   const [verificationCode, setVerificationCode] = useState(String);
   const {
-    params: {userName},
+    params: {userName, token},
   } = useRoute();
   const isButtonDisabled = verificationCode.length === 0;
   const register = () => {
     const data = {
       userName,
+      token,
       verificationCode,
     };
 
-    console.log(data, 'rrrr');
     dispatch(
       sendOTP(
         data,

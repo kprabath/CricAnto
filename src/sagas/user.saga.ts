@@ -6,7 +6,7 @@ import UserAPi from '../apis/user.api';
 export function* userRegister({payload, success, failed}) {
   try {
     const data = yield call(UserAPi.signUpAPI, payload);
-    success(data.message);
+    success(data.token);
   } catch (error) {
     failed(error.error);
   }
