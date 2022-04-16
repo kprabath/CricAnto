@@ -11,7 +11,7 @@ import {
 } from '../components';
 import {getScaledNumber} from '../library/utils';
 import colors from '../res/colors';
-import {SIGN_UP_SCREEN, WELCOME_SCREEN} from '../common/constants';
+import {SIGN_UP_SCREEN} from '../common/constants';
 import {useDispatch} from 'react-redux';
 
 import {userLogin} from '../actions/user.actions';
@@ -33,7 +33,7 @@ const Login = ({navigation}) => {
   const sumbit = () => {
     const data = {
       password,
-      username,
+      userName: username,
     };
     dispatch(
       userLogin(

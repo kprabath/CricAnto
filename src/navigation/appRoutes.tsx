@@ -68,6 +68,8 @@ import TabIcon3 from '../res/images/TabIcon3.svg';
 import TabIcon4 from '../res/images/TabIcon4.svg';
 import TabIcon5 from '../res/images/TabIcon5.svg';
 import UserAccount from '../screens/userAccount.screen';
+import {useSelector} from 'react-redux';
+import {Reducers} from '../types';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -130,7 +132,7 @@ const EventRoutes = () => {
   );
 };
 
-const DrawerNavigator = props => {
+const DrawerNavigator = _ => {
   return (
     <Drawer.Navigator
       useLegacyImplementation={false}
@@ -166,7 +168,7 @@ const DrawerNavigator = props => {
     </Drawer.Navigator>
   );
 };
-const TabNavigator = props => {
+const TabNavigator = _ => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -212,34 +214,51 @@ const TabNavigator = props => {
   );
 };
 
+const AuthRoutes = (
+  <>
+    <Stack.Screen
+      options={{headerShown: false}}
+      name={SIGN_UP_SCREEN}
+      component={SignUpScreen}
+    />
+    <Stack.Screen
+      options={{headerShown: false}}
+      name={OTP_SCREEN}
+      component={OTPScreen}
+    />
+    <Stack.Screen name={LOGIN_SCREEN} component={LoginScreen} />
+  </>
+);
+
+const MainRoutes = (
+  <>
+    <Stack.Screen name={AUTH_ROUTES} component={DrawerNavigator} />
+    <Stack.Screen
+      name={TOURNAMENTS_DETAIL_SCREEN}
+      component={TournamentDetailScreen}
+    />
+    <Stack.Screen name={VIDEO_STREAM_SCREEN} component={VideoBufferScreen} />
+  </>
+);
+
 const AppRoutes = () => {
+  // variable scope
+  const isAuthenticated = useSelector(
+    (state: Reducers) => state.auth.isAuthenticated,
+  );
+  const isFirstTime = useSelector((state: Reducers) => state.auth.isFirstTime);
+
   return (
     <NavigationContainer theme={CricantoTheme}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen
-          options={{headerShown: false}}
-          name={SIGN_UP_SCREEN}
-          component={SignUpScreen}
-        />
-           <Stack.Screen
-          options={{headerShown: false}}
-          name={OTP_SCREEN}
-          component={OTPScreen}
-        />
-        <Stack.Screen name={LOGIN_SCREEN} component={LoginScreen} />
-        <Stack.Screen name={WELCOME_SCREEN} component={WelcomeScreen} />
-        <Stack.Screen name={AUTH_ROUTES} component={DrawerNavigator} />
-        <Stack.Screen
-          name={TOURNAMENTS_DETAIL_SCREEN}
-          component={TournamentDetailScreen}
-        />
-        <Stack.Screen
-          name={VIDEO_STREAM_SCREEN}
-          component={VideoBufferScreen}
-        />
+        {!isAuthenticated && AuthRoutes}
+        {isAuthenticated && isFirstTime && (
+          <Stack.Screen name={WELCOME_SCREEN} component={WelcomeScreen} />
+        )}
+        {isAuthenticated && !isFirstTime && MainRoutes}
       </Stack.Navigator>
     </NavigationContainer>
   );

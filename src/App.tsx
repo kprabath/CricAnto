@@ -9,7 +9,7 @@
  */
 // import 'react-native-gesture-handler';
 import React from 'react';
-import {StatusBar, StyleSheet, useColorScheme} from 'react-native';
+import {StatusBar, StyleSheet} from 'react-native';
 import AppRoutes from './navigation/appRoutes';
 import Colors from './res/colors';
 import {SafeAreaProvider} from 'react-native-safe-area-context';

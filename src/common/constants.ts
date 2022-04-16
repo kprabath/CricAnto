@@ -37,3 +37,8 @@ export const END_LOADING = 'END_LOADING';
 export const USER_REGISTER = 'USER_REGISTER';
 export const USER_LOGIN = 'USER_LOGIN';
 export const SEND_OTP = 'SEND_OTP';
+
+export const SET_USER_LOGIN = 'SET_USER_LOGIN';
+export const SET_AUTH_NULL = 'SET_AUTH_NULL';
+export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN ';
+export const UPDATE_FIRST_TIME = 'UPDATE_FIRST_TIME';
