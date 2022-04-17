@@ -42,7 +42,7 @@ const Login = ({navigation}) => {
           Alert.alert('Success', message, [{text: 'OK', onPress: () => {}}]);
         },
         error => {
-          Alert.alert('Error', error, [{text: 'OK', onPress: () => {}}]);
+          Alert.alert('Error', error.errorMessage, [{text: 'OK', onPress: () => {}}]);
         },
       ),
     );
