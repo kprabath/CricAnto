@@ -247,6 +247,9 @@ const AppRoutes = () => {
     (state: Reducers) => state.auth.isAuthenticated,
   );
   const isFirstTime = useSelector((state: Reducers) => state.auth.isFirstTime);
+  const token = useSelector((state: Reducers) => state.auth.token);
+
+  console.log('token', token);
 
   return (
     <NavigationContainer theme={CricantoTheme}>

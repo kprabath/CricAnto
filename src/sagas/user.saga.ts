@@ -12,10 +12,7 @@ import UserAPi from '../apis/user.api';
 export function* userRegister({payload, success, failed}) {
   try {
     const data = yield call(UserAPi.signUpAPI, payload);
-    // yield all([
-    //  put({type: SET_AUTH_TOKEN, payload: data?.token}),
-    //   put({type: SET_USER_LOGIN, payload: true}),
-    // ]);
+    yield put({type: SET_AUTH_TOKEN, payload: data?.token});
     success(data.token);
   } catch (error) {
     failed(error);
@@ -25,11 +22,10 @@ export function* userRegister({payload, success, failed}) {
 export function* sendOTP({payload, success, failed}) {
   try {
     const data = yield call(UserAPi.sendOTPAPI, payload);
-    // yield all([
-    //   put({type: SET_AUTH_TOKEN, payload: data?.token}),
-    //   put({type: SET_USER_LOGIN, payload: true}),
-    // ]);
-    success(data.message);
+    if (data?.response?.acknowledged === true) {
+      yield put({type: SET_USER_LOGIN, payload: true});
+    }
+    // success(data.message);
   } catch (error) {
     failed(error);
   }
