@@ -42,3 +42,4 @@ export const SET_USER_LOGIN = 'SET_USER_LOGIN';
 export const SET_AUTH_NULL = 'SET_AUTH_NULL';
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN ';
 export const UPDATE_FIRST_TIME = 'UPDATE_FIRST_TIME';
+export const SET_USER_INFO = 'SET_USER_INFO';

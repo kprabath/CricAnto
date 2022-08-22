@@ -21,18 +21,18 @@ const createPath = (action: string) => {
   return {url};
 };
 
-// const getAuthToken = () => {
-//   try {
-//     const {
-//       auth: {token},
-//     } = store.getState();
-//     const authToken = `${token?.tokenType} ${token?.accessToken}`;
+const getAuthToken = (): string => {
+  try {
+    const {
+      auth: {token},
+    } = store.getState();
+    const authToken = `Bearer ${token}`;
 
-//     return authToken;
-//   } catch (error) {
-//     return null;
-//   }
-// };
+    return authToken;
+  } catch (error) {
+    return String(null);
+  }
+};
 
 const request = ({
   url,
@@ -40,14 +40,13 @@ const request = ({
   params,
   action,
   method,
-  // guest = false,
+  guest = false,
   // hideLoader = false,
   headers: addHeaders,
 }: IRequest) =>
   new Promise((resolve, reject) => {
     store.dispatch(startLoading());
-    // const { user, common } = store.getState() as Reducers;
-    const headers = {
+    const headers: AxiosRequestConfig['headers'] = {
       'Content-Type': 'application/json',
       ...addHeaders,
     };
@@ -62,13 +61,20 @@ const request = ({
       // cancelToken: AxiosCancelsource.token,
     };
 
+    if (!guest) {
+      const authToken = getAuthToken();
+      headers.Authorization = authToken;
+    }
+
     Axios(axiosConfig)
       .then(response => {
-        resolve(response.data);
+        console.log(action, data, response);
+        resolve(response);
+
         store.dispatch(endLoading());
       })
       .catch(error => {
-        // console.log(error?.response?.data || error, '333');
+        console.log(action, data, error);
         store.dispatch(endLoading());
         reject(error?.response?.data || error);
       });

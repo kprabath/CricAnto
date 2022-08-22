@@ -5,6 +5,7 @@ export default class UserAPI {
     Api.request({
       method: 'post',
       action: 'register',
+      guest: true,
       data,
     });
 
@@ -12,6 +13,7 @@ export default class UserAPI {
     Api.request({
       method: 'post',
       action: 'login',
+      guest: true,
       data,
     });
 

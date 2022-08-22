@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Link} from '@react-navigation/native';
-import {useSelector, useDispatch} from 'react-redux';
+import {Link, useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
 import {StyleSheet, View, TouchableOpacity, Alert} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {CricantoTextTypes} from '../enums';
@@ -23,7 +23,7 @@ import Facebook from '../res/images/Facebook.svg';
 
 import {userRegister} from '../actions/user.actions';
 
-const SignUp = ({navigation}) => {
+const SignUp = ({navigation}: {navigation: typeof useNavigation}) => {
   const dispatch = useDispatch();
   const [isSelected, setSelection] = useState(false);
   const [firstName, setFirstname] = useState(String);
@@ -33,6 +33,7 @@ const SignUp = ({navigation}) => {
   const [email, setEmail] = useState(String);
   const [address, setAddress] = useState(String);
   const [phoneNumber, setPhoneNumber] = useState(String);
+  const [userType, setUserType] = useState<string>();
 
   const isButtonDisabled =
     firstName.length === 0 ||
@@ -41,7 +42,8 @@ const SignUp = ({navigation}) => {
     password.length === 0 ||
     userName.length === 0 ||
     phoneNumber.length === 0 ||
-    address.length === 0;
+    address.length === 0 ||
+    userType?.length === 0;
 
   const register = () => {
     const data = {
@@ -52,14 +54,15 @@ const SignUp = ({navigation}) => {
       phoneNumber,
       password,
       userName,
+      userType,
     };
     dispatch(
       userRegister(
         data,
-        token => {
+        (token: string) => {
           navigation.navigate(OTP_SCREEN, {userName, token});
         },
-        error => {
+        (error: any) => {
           Alert.alert('Error', error, [{text: 'OK', onPress: () => {}}]);
         },
       ),
@@ -127,6 +130,15 @@ const SignUp = ({navigation}) => {
           setState={setPassword}
         />
 
+        <CricantoInput
+          style={styles.commonInput}
+          placeholder="Enter user type"
+          Icon={Lock}
+          value={userType}
+          setState={setUserType}
+          // can be (players,user, scorers, administrators, sellers, shop admin)
+        />
+
         <View style={styles.checkboxContainer}>
           <CheckBox
             boxType="square"
@@ -189,7 +201,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     marginHorizontal: getScaledNumber(30),
-    marginVertical: getScaledNumber(20),
+    // marginVertical: getScaledNumber(20),
     justifyContent: 'space-between',
   },
   socialMediaContent: {
@@ -227,21 +239,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: getScaledNumber(20),
     marginBottom: getScaledNumber(20),
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    maxWidth: '96%',
+    paddingHorizontal: 18,
   },
   checkbox: {
     height: 16,
     width: 16,
     marginRight: 8,
-    marginLeft: 18,
   },
   label: {
     margin: 8,
   },
   checkBoxTextStyle: {
     color: colors.darkGray,
+    marginLeft: 10,
   },
   title: {
     fontWeight: '700',

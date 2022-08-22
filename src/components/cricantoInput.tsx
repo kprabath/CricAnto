@@ -16,11 +16,11 @@ const CricantoInput = ({
         {Icon && <Icon style={styles.imageStyle} />}
 
         <TextInput
-          style={{flex: 1}}
+          style={styles.txtInput}
           onChangeText={setState}
           value={value}
           autoCapitalize="none"
-          secureTextEntry={isProtected && true}
+          secureTextEntry={isProtected}
           placeholder={placeholder}
           underlineColorAndroid="transparent"
         />
@@ -30,6 +30,9 @@ const CricantoInput = ({
 };
 
 const styles = StyleSheet.create({
+  txtInput: {
+    flex: 1,
+  },
   container: {
     justifyContent: 'center',
     alignItems: 'center',

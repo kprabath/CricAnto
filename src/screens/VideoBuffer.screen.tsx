@@ -14,7 +14,11 @@ import colors from '../res/colors';
 
 export default () => {
   return (
-    <CricantoHeader enableHeader isScrollView containerStyle={style.container} backKey>
+    <CricantoHeader
+      enableHeader
+      isScrollView
+      containerStyle={style.container}
+      backKey>
       <LiveEventIndicator hideEventButton />
       <View style={style.videoViewWrapper}>
         <VideoPlayer
