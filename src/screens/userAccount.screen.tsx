@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, TextInput} from 'react-native';
 import {CricantoTextTypes} from '../enums';
 import {getScaledNumber} from '../library/utils';
 import {TICKETS_SCREEN} from '../common/constants';
@@ -9,6 +9,7 @@ import {
   CricantoModal,
   CricantoText,
   CricantoButton,
+  CricantoInput,
 } from '../components';
 import CheckBox from '@react-native-community/checkbox';
 
@@ -20,8 +21,21 @@ import Colors from '../res/colors';
 
 const UserAccount = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [isSelected, setSelection] = useState(false);
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [useRoleModal, setUserRoleModal] = useState(false);
+  const [EditMailModal, setEditMailModal] = useState(false);
+  const [EditMobileNoModal, setEditMobileNoModal] = useState(false);
+  const [EditAgeModel, setEditAgeModel] = useState(false);
+  const [editMail, setEditMail] = useState(String);
+  const [editMobileNo, setEditMobileNo] = useState(String);
+  const [editAge, setEditAge] = useState(String);
+  const [roleCheck1, setRoleCheck1] = useState(false);
+  const [roleCheck2, setRoleCheck2] = useState(false);
+  const [roleCheck3, setRoleCheck3] = useState(false);
+  const [statusCheck1, setStatusCheck1] = useState(false);
+  const [statusCheck2, setStatusCheck2] = useState(false);
+  const [statusCheck3, setStatusCheck3] = useState(false);
   const navigation = useNavigation();
 
   const successModal = () => (
@@ -52,8 +66,8 @@ const UserAccount = () => {
         <CheckBox
           boxType="square"
           lineWidth={1.0}
-          // value={isSelected}
-          // onValueChange={setSelection}
+          value={statusCheck1}
+          onValueChange={setStatusCheck1}
           style={styles.checkbox}
         />
       </View>
@@ -66,8 +80,8 @@ const UserAccount = () => {
         <CheckBox
           boxType="square"
           lineWidth={1.0}
-          // value={isSelected}
-          // onValueChange={setSelection}
+          value={statusCheck2}
+          onValueChange={setStatusCheck2}
           style={styles.checkbox}
         />
       </View>
@@ -80,8 +94,8 @@ const UserAccount = () => {
         <CheckBox
           boxType="square"
           lineWidth={1.0}
-          // value={isSelected}
-          // onValueChange={setSelection}
+          value={statusCheck3}
+          onValueChange={setStatusCheck3}
           style={styles.checkbox}
         />
       </View>
@@ -106,8 +120,8 @@ const UserAccount = () => {
         <CheckBox
           boxType="square"
           lineWidth={1.0}
-          // value={isSelected}
-          // onValueChange={setSelection}
+          value={roleCheck1}
+          onValueChange={setRoleCheck1}
           style={styles.checkbox}
         />
       </View>
@@ -120,8 +134,8 @@ const UserAccount = () => {
         <CheckBox
           boxType="square"
           lineWidth={1.0}
-          // value={isSelected}
-          // onValueChange={setSelection}
+          value={roleCheck2}
+          onValueChange={setRoleCheck2}
           style={styles.checkbox}
         />
       </View>
@@ -134,8 +148,8 @@ const UserAccount = () => {
         <CheckBox
           boxType="square"
           lineWidth={1.0}
-          // value={isSelected}
-          // onValueChange={setSelection}
+          value={roleCheck3}
+          onValueChange={setRoleCheck3}
           style={styles.checkbox}
         />
       </View>
@@ -146,6 +160,87 @@ const UserAccount = () => {
           setUserRoleModal(false), setSuccessModalVisible(true);
         }}
       />
+    </View>
+  );
+
+  const modalView3 = () => (
+    <View style={[styles.modalContainer]}>
+      <TextInput
+        style={styles.commonInput}
+        placeholder="Email"
+        onChangeText={setEditMail}
+        value={editMail}
+      />
+      <View style={[styles.modalContainerInner]}>
+        <CricantoButton
+          label="Done"
+          containerStyle={styles.btnStyle}
+          onPress={() => {
+            setEditMailModal(false), setSuccessModalVisible(true);
+          }}
+        />
+        <CricantoButton
+          label="Cancel"
+          containerStyle={styles.btnStyle}
+          onPress={() => {
+            setEditMailModal(false), setEditMail('');
+          }}
+        />
+      </View>
+    </View>
+  );
+  const modalView4 = () => (
+    <View style={[styles.modalContainer]}>
+      <TextInput
+        style={styles.commonInput}
+        placeholder="Mobile"
+        maxLength={10}
+        onChangeText={setEditMobileNo}
+        value={editMobileNo}
+      />
+      <View style={[styles.modalContainerInner]}>
+        <CricantoButton
+          label="Done"
+          containerStyle={styles.btnStyle}
+          onPress={() => {
+            setEditMobileNoModal(false), setSuccessModalVisible(true);
+          }}
+        />
+        <CricantoButton
+          label="Cancel"
+          containerStyle={styles.btnStyle}
+          onPress={() => {
+            setEditMobileNoModal(false), setEditMobileNo('');
+          }}
+        />
+      </View>
+    </View>
+  );
+  const modalView5 = () => (
+    <View style={[styles.modalContainer]}>
+      <TextInput
+        style={styles.commonInput}
+        placeholder="Age"
+        maxLength={3}
+        onChangeText={setEditAge}
+        value={editAge}
+      />
+      <View style={[styles.modalContainerInner]}>
+        <CricantoButton
+          label="Done"
+          containerStyle={styles.btnStyle}
+          onPress={() => {
+            setEditAgeModel(false), setSuccessModalVisible(true);
+          }}
+        />
+        <CricantoButton
+          label="Cancel"
+          containerStyle={styles.btnStyle}
+          onPress={() => {
+            setEditAgeModel(false), setEditAge('');
+          }}
+        />
+      </View>
     </View>
   );
   return (
@@ -174,14 +269,18 @@ const UserAccount = () => {
           </View>
         </View>
 
-        <View style={styles.infoContent}>
+        <TouchableOpacity
+          style={styles.infoContent}
+          onPress={() => setEditMailModal(true)}>
           <CricantoText label="Email" />
           <CricantoText label=":  muththaiya@gmail.com" />
-        </View>
-        <View style={styles.infoContent}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.infoContent}
+          onPress={() => setEditMobileNoModal(true)}>
           <CricantoText label="Mobile Number" />
           <CricantoText label=":  0777123456" />
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.statusBtnContainer}>
           <CricantoText label="Status" />
@@ -197,7 +296,9 @@ const UserAccount = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.userDetailsContent}>
-          <View style={styles.infoCard}>
+          <TouchableOpacity
+            style={styles.infoCard}
+            onPress={() => setEditAgeModel(true)}>
             <CricantoText
               label="1993"
               type={CricantoTextTypes.H4}
@@ -208,8 +309,8 @@ const UserAccount = () => {
               type={CricantoTextTypes.BUTTON_LBL}
               style={styles.infoCardSubText}
             />
-          </View>
-          <View style={styles.infoCard}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.infoCard}>
             <CricantoText
               label="Kandy"
               type={CricantoTextTypes.H4}
@@ -220,8 +321,8 @@ const UserAccount = () => {
               type={CricantoTextTypes.BUTTON_LBL}
               style={styles.infoCardSubText}
             />
-          </View>
-          <View style={styles.infoCard}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.infoCard}>
             <CricantoText
               label="22yo"
               type={CricantoTextTypes.H4}
@@ -232,11 +333,16 @@ const UserAccount = () => {
               type={CricantoTextTypes.BUTTON_LBL}
               style={styles.infoCardSubText}
             />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
       <CricantoModal modalVisible={modalVisible}>{modalView()}</CricantoModal>
       <CricantoModal modalVisible={useRoleModal}>{modalView2()}</CricantoModal>
+      <CricantoModal modalVisible={EditMailModal}>{modalView3()}</CricantoModal>
+      <CricantoModal modalVisible={EditMobileNoModal}>
+        {modalView4()}
+      </CricantoModal>
+      <CricantoModal modalVisible={EditAgeModel}>{modalView5()}</CricantoModal>
       <CricantoModal modalVisible={successModalVisible}>
         {successModal()}
       </CricantoModal>
@@ -278,12 +384,17 @@ const styles = StyleSheet.create({
     padding: getScaledNumber(30),
   },
 
+  modalContainerInner: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
   successModalContainer: {
     padding: getScaledNumber(30),
     alignItems: 'center',
   },
   btnStyle: {
-    width: '50%',
+    width: '48%',
     marginTop: getScaledNumber(20),
     alignSelf: 'center',
   },
@@ -292,6 +403,7 @@ const styles = StyleSheet.create({
     marginVertical: getScaledNumber(10),
     justifyContent: 'space-between',
     alignItems: 'center',
+    height: 30,
   },
   infoCardSubText: {
     color: Colors.darkGray,
@@ -355,6 +467,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: getScaledNumber(20),
+  },
+  commonInput: {
+    marginTop: getScaledNumber(15),
+    height: 50,
+    width: '100%',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: 'black',
   },
 });
 
