@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {StyleSheet, View, TouchableOpacity, TextInput} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, TextInput,Alert} from 'react-native';
 import {CricantoTextTypes} from '../enums';
 import {getScaledNumber} from '../library/utils';
 import {TICKETS_SCREEN} from '../common/constants';
@@ -12,45 +12,90 @@ import {
   CricantoInput,
 } from '../components';
 import CheckBox from '@react-native-community/checkbox';
+import {updateUserEmail,updateUserTelephoneNo} from '../actions/user.actions';
+import {useDispatch, useSelector} from 'react-redux';
 
 import UserDP from '../res/images/UserDP.svg';
 import Menu from '../res/images/MenuIcon.svg';
 import Success from '../res/images/Success.svg';
 
 import Colors from '../res/colors';
+import { Reducers } from '../types';
 
 const UserAccount = () => {
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
-  const [isSelected, setSelection] = useState(false);
+  // const [isSelected, setSelection] = useState(false);
   const [successModalVisible, setSuccessModalVisible] = useState(false);
-  const [useRoleModal, setUserRoleModal] = useState(false);
+  // const [useRoleModal, setUserRoleModal] = useState(false);
   const [EditMailModal, setEditMailModal] = useState(false);
   const [EditMobileNoModal, setEditMobileNoModal] = useState(false);
-  const [EditAgeModel, setEditAgeModel] = useState(false);
+  // const [EditAgeModel, setEditAgeModel] = useState(false);
   const [editMail, setEditMail] = useState(String);
   const [editMobileNo, setEditMobileNo] = useState(String);
-  const [editAge, setEditAge] = useState(String);
-  const [roleCheck1, setRoleCheck1] = useState(false);
-  const [roleCheck2, setRoleCheck2] = useState(false);
-  const [roleCheck3, setRoleCheck3] = useState(false);
+  // const [editAge, setEditAge] = useState(String);
+  const [successModalType, setSuccessModalType] = useState(String);
+  // const [roleCheck1, setRoleCheck1] = useState(false);
+  // const [roleCheck2, setRoleCheck2] = useState(false);
+  // const [roleCheck3, setRoleCheck3] = useState(false);
   const [statusCheck1, setStatusCheck1] = useState(false);
   const [statusCheck2, setStatusCheck2] = useState(false);
   const [statusCheck3, setStatusCheck3] = useState(false);
   const navigation = useNavigation();
 
+  const email = useSelector((state:Reducers)=> state.auth.userInfo?.email);
+  const telephoneNo = useSelector((state:Reducers)=> state.auth.userInfo?.phoneNumber);
+  const name = useSelector((state:Reducers)=> state.auth.userInfo?.name);
+
+  const editUserEmail = () => {
+    const data = {
+      updatedEmail:editMail,
+    };
+    dispatch(
+      updateUserEmail(
+        data,
+        () => {
+          setModalVisible(false), setSuccessModalVisible(true), setSuccessModalType("User Email");
+        },
+        error => {
+          Alert.alert('Error', error.errorMessage, [{text: 'OK', onPress: () => {}}]);
+        },
+      ),
+    );
+  };
+
+  const editUserTelephoneNo = () => {
+    const data = {
+      updatedPhoneNumber:editMobileNo,
+    };
+    dispatch(
+      updateUserTelephoneNo(
+        data,
+        () => {
+          setModalVisible(false), setSuccessModalVisible(true), setSuccessModalType("User Mobile No");
+        },
+        error => {
+          Alert.alert('Error', error.errorMessage, [{text: 'OK', onPress: () => {}}]);
+        },
+      ),
+    );
+  };
+
+
   const successModal = () => (
     <View style={styles.successModalContainer}>
       <Success />
       <CricantoText
-        label="You Susscessfully change 
-          User Role"
+        label={"You Susscessfully change " + successModalType}
         type={CricantoTextTypes.BODY_SMALL}
         style={styles.successText}
       />
       <CricantoButton
         label="Continue"
         containerStyle={styles.btnStyle}
-        onPress={() => setSuccessModalVisible(false)}
+        onPress={() => {
+          setEditMailModal(false),setEditMobileNoModal(false), setSuccessModalVisible(false);
+        }}
       />
     </View>
   );
@@ -103,65 +148,65 @@ const UserAccount = () => {
         label="Done"
         containerStyle={styles.btnStyle}
         onPress={() => {
-          setModalVisible(false), setSuccessModalVisible(true);
+          setModalVisible(false), setSuccessModalVisible(true),setSuccessModalType("User Status");
         }}
       />
     </View>
   );
 
-  const modalView2 = () => (
-    <View style={[styles.modalContainer]}>
-      <View style={styles.checkboxContainer}>
-        <CricantoText
-          label="Admin"
-          type={CricantoTextTypes.BODY_SMALL}
-          style={styles.checkBoxTextStyle}
-        />
-        <CheckBox
-          boxType="square"
-          lineWidth={1.0}
-          value={roleCheck1}
-          onValueChange={setRoleCheck1}
-          style={styles.checkbox}
-        />
-      </View>
-      <View style={styles.checkboxContainer}>
-        <CricantoText
-          label="Editor"
-          type={CricantoTextTypes.BODY_SMALL}
-          style={styles.checkBoxTextStyle}
-        />
-        <CheckBox
-          boxType="square"
-          lineWidth={1.0}
-          value={roleCheck2}
-          onValueChange={setRoleCheck2}
-          style={styles.checkbox}
-        />
-      </View>
-      <View style={styles.checkboxContainer}>
-        <CricantoText
-          label="User"
-          type={CricantoTextTypes.BODY_SMALL}
-          style={styles.checkBoxTextStyle}
-        />
-        <CheckBox
-          boxType="square"
-          lineWidth={1.0}
-          value={roleCheck3}
-          onValueChange={setRoleCheck3}
-          style={styles.checkbox}
-        />
-      </View>
-      <CricantoButton
-        label="Done"
-        containerStyle={styles.btnStyle}
-        onPress={() => {
-          setUserRoleModal(false), setSuccessModalVisible(true);
-        }}
-      />
-    </View>
-  );
+  // const modalView2 = () => (
+  //   <View style={[styles.modalContainer]}>
+  //     <View style={styles.checkboxContainer}>
+  //       <CricantoText
+  //         label="Admin"
+  //         type={CricantoTextTypes.BODY_SMALL}
+  //         style={styles.checkBoxTextStyle}
+  //       />
+  //       <CheckBox
+  //         boxType="square"
+  //         lineWidth={1.0}
+  //         value={roleCheck1}
+  //         onValueChange={setRoleCheck1}
+  //         style={styles.checkbox}
+  //       />
+  //     </View>
+  //     <View style={styles.checkboxContainer}>
+  //       <CricantoText
+  //         label="Editor"
+  //         type={CricantoTextTypes.BODY_SMALL}
+  //         style={styles.checkBoxTextStyle}
+  //       />
+  //       <CheckBox
+  //         boxType="square"
+  //         lineWidth={1.0}
+  //         value={roleCheck2}
+  //         onValueChange={setRoleCheck2}
+  //         style={styles.checkbox}
+  //       />
+  //     </View>
+  //     <View style={styles.checkboxContainer}>
+  //       <CricantoText
+  //         label="User"
+  //         type={CricantoTextTypes.BODY_SMALL}
+  //         style={styles.checkBoxTextStyle}
+  //       />
+  //       <CheckBox
+  //         boxType="square"
+  //         lineWidth={1.0}
+  //         value={roleCheck3}
+  //         onValueChange={setRoleCheck3}
+  //         style={styles.checkbox}
+  //       />
+  //     </View>
+  //     <CricantoButton
+  //       label="Done"
+  //       containerStyle={styles.btnStyle}
+  //       onPress={() => {
+  //         setUserRoleModal(false), setSuccessModalVisible(true),setSuccessModalType("User Role Model");
+  //       }}
+  //     />
+  //   </View>
+  // );
 
   const modalView3 = () => (
     <View style={[styles.modalContainer]}>
@@ -176,7 +221,7 @@ const UserAccount = () => {
           label="Done"
           containerStyle={styles.btnStyle}
           onPress={() => {
-            setEditMailModal(false), setSuccessModalVisible(true);
+            editUserEmail()
           }}
         />
         <CricantoButton
@@ -203,7 +248,7 @@ const UserAccount = () => {
           label="Done"
           containerStyle={styles.btnStyle}
           onPress={() => {
-            setEditMobileNoModal(false), setSuccessModalVisible(true);
+            editUserTelephoneNo()
           }}
         />
         <CricantoButton
@@ -216,33 +261,33 @@ const UserAccount = () => {
       </View>
     </View>
   );
-  const modalView5 = () => (
-    <View style={[styles.modalContainer]}>
-      <TextInput
-        style={styles.commonInput}
-        placeholder="Age"
-        maxLength={3}
-        onChangeText={setEditAge}
-        value={editAge}
-      />
-      <View style={[styles.modalContainerInner]}>
-        <CricantoButton
-          label="Done"
-          containerStyle={styles.btnStyle}
-          onPress={() => {
-            setEditAgeModel(false), setSuccessModalVisible(true);
-          }}
-        />
-        <CricantoButton
-          label="Cancel"
-          containerStyle={styles.btnStyle}
-          onPress={() => {
-            setEditAgeModel(false), setEditAge('');
-          }}
-        />
-      </View>
-    </View>
-  );
+  // const modalView5 = () => (
+  //   <View style={[styles.modalContainer]}>
+  //     <TextInput
+  //       style={styles.commonInput}
+  //       placeholder="Age"
+  //       maxLength={3}
+  //       onChangeText={setEditAge}
+  //       value={editAge}
+  //     />
+  //     <View style={[styles.modalContainerInner]}>
+  //       <CricantoButton
+  //         label="Done"
+  //         containerStyle={styles.btnStyle}
+  //         onPress={() => {
+  //           setEditAgeModel(false), setSuccessModalVisible(true);
+  //         }}
+  //       />
+  //       <CricantoButton
+  //         label="Cancel"
+  //         containerStyle={styles.btnStyle}
+  //         onPress={() => {
+  //           setEditAgeModel(false), setEditAge('');
+  //         }}
+  //       />
+  //     </View>
+  //   </View>
+  // );
   return (
     <CricantoHeader
       enableHeader
@@ -254,11 +299,11 @@ const UserAccount = () => {
           <UserDP />
           <View style={styles.editBtnContent}>
             <CricantoText
-              label="Muththaiya Muralitharan"
+              label={name}
               type={CricantoTextTypes.H4}
             />
             <TouchableOpacity
-              onPress={() => setUserRoleModal(true)}
+              // onPress={() => setUserRoleModal(true)}
               style={styles.editBtn}>
               <CricantoText
                 label="Edit Role"
@@ -273,13 +318,13 @@ const UserAccount = () => {
           style={styles.infoContent}
           onPress={() => setEditMailModal(true)}>
           <CricantoText label="Email" />
-          <CricantoText label=":  muththaiya@gmail.com" />
+          <CricantoText label={email} />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.infoContent}
           onPress={() => setEditMobileNoModal(true)}>
           <CricantoText label="Mobile Number" />
-          <CricantoText label=":  0777123456" />
+          <CricantoText label={telephoneNo} />
         </TouchableOpacity>
 
         <View style={styles.statusBtnContainer}>
@@ -298,7 +343,8 @@ const UserAccount = () => {
         <View style={styles.userDetailsContent}>
           <TouchableOpacity
             style={styles.infoCard}
-            onPress={() => setEditAgeModel(true)}>
+            // onPress={() => setEditAgeModel(true)}
+            >
             <CricantoText
               label="1993"
               type={CricantoTextTypes.H4}
@@ -337,12 +383,12 @@ const UserAccount = () => {
         </View>
       </View>
       <CricantoModal modalVisible={modalVisible}>{modalView()}</CricantoModal>
-      <CricantoModal modalVisible={useRoleModal}>{modalView2()}</CricantoModal>
+      {/* <CricantoModal modalVisible={useRoleModal}>{modalView2()}</CricantoModal> */}
       <CricantoModal modalVisible={EditMailModal}>{modalView3()}</CricantoModal>
       <CricantoModal modalVisible={EditMobileNoModal}>
         {modalView4()}
       </CricantoModal>
-      <CricantoModal modalVisible={EditAgeModel}>{modalView5()}</CricantoModal>
+      {/* <CricantoModal modalVisible={EditAgeModel}>{modalView5()}</CricantoModal> */}
       <CricantoModal modalVisible={successModalVisible}>
         {successModal()}
       </CricantoModal>

@@ -23,4 +23,18 @@ export default class UserAPI {
       action: 'register/verify',
       data,
     });
+
+  static updateUserEmailAPI = data =>
+    Api.request({
+      method: 'post',
+      action: 'user/update/email',
+      data,
+    });
+
+  static updateUserTelephoneNoAPI = data =>
+    Api.request({
+      method: 'post',
+      action: 'user/update/mobile_number',
+      data,
+    });
 }
