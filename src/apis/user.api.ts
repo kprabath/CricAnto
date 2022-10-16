@@ -37,4 +37,11 @@ export default class UserAPI {
       action: 'user/update/mobile_number',
       data,
     });
+
+  static updateUserAddressAPI = data =>
+    Api.request({
+      method: 'post',
+      action: 'user/update/address',
+      data,
+    });
 }
