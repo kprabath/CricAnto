@@ -44,4 +44,11 @@ export default class UserAPI {
       action: 'user/update/address',
       data,
     });
+
+  static updateUserStatusAPI = data =>
+    Api.request({
+      method: 'post',
+      action: 'user/update/status',
+      data,
+    });
 }

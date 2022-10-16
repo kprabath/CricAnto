@@ -1,4 +1,4 @@
-import { USER_LOGIN, SEND_OTP, USER_REGISTER, UPDATE_USER_EMAIL, UPDATE_USER_TELEPHONE_NO, UPDATE_USER_ADDRESS } from '../common/constants';
+import { USER_LOGIN, SEND_OTP, USER_REGISTER, UPDATE_USER_EMAIL, UPDATE_USER_TELEPHONE_NO, UPDATE_USER_ADDRESS,UPDATE_USER_STATUS } from '../common/constants';
 
 export const userLogin = (
   payload: Object,
@@ -61,6 +61,17 @@ export const updateUserAddress = (
   failed: Function,
 ) => ({
   type: UPDATE_USER_ADDRESS,
+  payload,
+  success,
+  failed,
+});
+
+export const updateUserStatus = (
+  payload: Object,
+  success: Function,
+  failed: Function,
+) => ({
+  type: UPDATE_USER_STATUS,
   payload,
   success,
   failed,

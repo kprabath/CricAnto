@@ -8,7 +8,8 @@ import {
   SET_USER_INFO,
   UPDATE_USER_EMAIL,
   UPDATE_USER_TELEPHONE_NO,
-  UPDATE_USER_ADDRESS
+  UPDATE_USER_ADDRESS,
+  UPDATE_USER_STATUS
 
 } from '../common/constants';
 
@@ -93,6 +94,19 @@ export function* userUpdateAddress({ payload, success, failed }: TSaga) {
   }
 }
 
+export function* userUpdateStatus({ payload, success, failed }: TSaga) {
+  try {
+    const { data } = yield call(UserAPi.updateUserStatusAPI, payload);
+    const existingUserInfo: AuthReducers['userInfo'] = yield select((state: Reducers) => state.auth.userInfo);
+    const newUserInfo = { ...existingUserInfo, Status: payload.updatedStatus }
+    yield put({ type: SET_USER_INFO, payload: newUserInfo });
+    success(data.message);
+  } catch (error) {
+    failed(error);
+  }
+}
+
+
 
 function* userSaga() {
   yield takeEvery(USER_REGISTER, userRegister);
@@ -101,6 +115,7 @@ function* userSaga() {
   yield takeEvery(UPDATE_USER_EMAIL, userUpdateEmail);
   yield takeEvery(UPDATE_USER_TELEPHONE_NO, userUpdateTelephoneNo);
   yield takeEvery(UPDATE_USER_ADDRESS, userUpdateAddress);
+  yield takeEvery(UPDATE_USER_STATUS, userUpdateStatus);
 }
 
 export default userSaga;

@@ -22,6 +22,7 @@ import {
   updateUserEmail,
   updateUserTelephoneNo,
   updateUserAddress,
+  updateUserStatus,
 } from '../actions/user.actions';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -31,7 +32,7 @@ import Success from '../res/images/Success.svg';
 
 import Colors from '../res/colors';
 import {Reducers} from '../types';
-import { State } from 'react-native-gesture-handler';
+import {State} from 'react-native-gesture-handler';
 
 const UserAccount = () => {
   const dispatch = useDispatch();
@@ -44,8 +45,6 @@ const UserAccount = () => {
   const [editMobileNo, setEditMobileNo] = useState(String);
   const [editAddress, setEditAddress] = useState(String);
   const [successModalType, setSuccessModalType] = useState(String);
-  
-  
 
   const navigation = useNavigation();
 
@@ -59,8 +58,8 @@ const UserAccount = () => {
   );
 
   const status = useSelector((state: Reducers) => state.auth.userInfo?.Status);
-  console.log("status"+ status)
-  const [userState, setUserState] = useState("Active");
+  console.log('status' + status);
+  const [userState, setUserState] = useState('Active');
 
   const editUserEmail = () => {
     const data = {
@@ -125,6 +124,27 @@ const UserAccount = () => {
     );
   };
 
+  const editUserStatus = () => {
+    const data = {
+      updatedStatus: userState == 'Active' ? 'ACTIVE' : 'INACTIVE',
+    };
+    dispatch(
+      updateUserStatus(
+        data,
+        () => {
+          setModalVisible(false),
+            setSuccessModalVisible(true),
+            setSuccessModalType('User Status');
+        },
+        error => {
+          Alert.alert('Error', error.errorMessage, [
+            {text: 'OK', onPress: () => {}},
+          ]);
+        },
+      ),
+    );
+  };
+
   const successModal = () => (
     <View style={styles.successModalContainer}>
       <Success />
@@ -173,9 +193,9 @@ const UserAccount = () => {
         <CheckBox
           boxType="square"
           lineWidth={1.0}
-          value = {userState === "Active"}
+          value={userState === 'Active'}
           onValueChange={() => {
-            setUserState("Active")
+            setUserState('Active');
           }}
           style={styles.checkbox}
         />
@@ -189,9 +209,9 @@ const UserAccount = () => {
         <CheckBox
           boxType="square"
           lineWidth={1.0}
-          value = {userState === "Permemantly Suspend"}
-          onValueChange={(value) => {
-            setUserState("Permemantly Suspend")
+          value={userState === 'Permemantly Suspend'}
+          onValueChange={value => {
+            setUserState('Permemantly Suspend');
           }}
           style={styles.checkbox}
         />
@@ -205,9 +225,9 @@ const UserAccount = () => {
         <CheckBox
           boxType="square"
           lineWidth={1.0}
-          value = {userState === "Temporary Suspend"}
-          onValueChange={(value) => {
-            setUserState("Temporary Suspend")
+          value={userState === 'Temporary Suspend'}
+          onValueChange={value => {
+            setUserState('Temporary Suspend');
           }}
           style={styles.checkbox}
         />
@@ -216,9 +236,8 @@ const UserAccount = () => {
         label="Done"
         containerStyle={styles.btnStyle}
         onPress={() => {
-          setModalVisible(false),
-            setSuccessModalVisible(true),
-            setSuccessModalType('User Status');
+          editUserStatus(),
+            setModalVisible(false);
         }}
       />
     </View>
