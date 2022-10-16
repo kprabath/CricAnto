@@ -310,7 +310,7 @@ const UserAccount = () => {
           label="Done"
           containerStyle={styles.btnStyle}
           onPress={() => {
-            editUserAddress();
+            editUserAddress(),setEditAddressModal(false);
           }}
         />
         <CricantoButton
@@ -337,7 +337,7 @@ const UserAccount = () => {
           label="Done"
           containerStyle={styles.btnStyle}
           onPress={() => {
-            editUserEmail();
+            editUserEmail(),setEditMailModal(false);
           }}
         />
         <CricantoButton
@@ -364,7 +364,7 @@ const UserAccount = () => {
           label="Done"
           containerStyle={styles.btnStyle}
           onPress={() => {
-            editUserTelephoneNo();
+            editUserTelephoneNo(),setEditMobileNoModal(false);
           }}
         />
         <CricantoButton
