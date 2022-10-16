@@ -5,6 +5,8 @@ import {CricantoTextTypes} from '../enums';
 import {getScaledNumber} from '../library/utils';
 import {TICKETS_SCREEN} from '../common/constants';
 import {CricantoHeader, CricantoText} from '../components';
+import {useSelector} from 'react-redux';
+import {Reducers} from '../types';
 
 import UserDP from '../res/images/UserDP.svg';
 import UserProfile from '../res/images/UserProfile.svg';
@@ -19,6 +21,11 @@ import Colors from '../res/colors';
 
 const Profile = () => {
   const navigation = useNavigation();
+  const name = useSelector((state: Reducers) => state.auth.userInfo?.name);
+  const address = useSelector(
+    (state: Reducers) => state.auth.userInfo?.address,
+  );
+
   return (
     <CricantoHeader enableHeader headerTitle="Profile">
       <View style={styles.container}>
@@ -26,7 +33,7 @@ const Profile = () => {
           <UserDP />
           <View style={styles.editBtnContent}>
             <CricantoText
-              label="Muththaiya Muralitharan"
+              label={name}
               type={CricantoTextTypes.H4}
             />
             <TouchableOpacity style={styles.editBtn}>
@@ -39,7 +46,7 @@ const Profile = () => {
           </View>
         </View>
         <View style={styles.userDetailsContent}>
-          <View style={styles.infoCard}>
+          {/* <View style={styles.infoCard}>
             <CricantoText
               label="1993"
               type={CricantoTextTypes.H4}
@@ -50,10 +57,10 @@ const Profile = () => {
               type={CricantoTextTypes.BUTTON_LBL}
               style={styles.infoCardSubText}
             />
-          </View>
+          </View> */}
           <View style={styles.infoCard}>
             <CricantoText
-              label="Kandy"
+              label={address}
               type={CricantoTextTypes.H4}
               style={styles.infoCardText}
             />
@@ -63,7 +70,7 @@ const Profile = () => {
               style={styles.infoCardSubText}
             />
           </View>
-          <View style={styles.infoCard}>
+          {/* <View style={styles.infoCard}>
             <CricantoText
               label="22yo"
               type={CricantoTextTypes.H4}
@@ -74,7 +81,7 @@ const Profile = () => {
               type={CricantoTextTypes.BUTTON_LBL}
               style={styles.infoCardSubText}
             />
-          </View>
+          </View> */}
         </View>
         <View style={styles.ticketBtnContent}>
           <TouchableOpacity
