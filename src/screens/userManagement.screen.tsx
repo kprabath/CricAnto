@@ -9,12 +9,15 @@ import {CricantoTextTypes} from '../enums';
 import {USER_ACCOUNT_SCREEN} from '../common/constants';
 import colors from '../res/colors';
 import LinearGradient from 'react-native-linear-gradient';
+import {useSelector} from 'react-redux';
+import {Reducers} from '../types';
 
 import Menu from '../res/images/MenuIcon.svg';
 import Search from '../res/images/Search.svg';
 import UserDP from '../res/images/UserDP.svg';
 const UserManagement = () => {
   const navigation = useNavigation();
+  const name = useSelector((state: Reducers) => state.auth.userInfo?.name);
 
   return (
     <CricantoHeader
@@ -40,7 +43,7 @@ const UserManagement = () => {
           <UserDP />
 
           <CricantoText
-            label="Muththaiya Muralitharan"
+            label={name}
             type={CricantoTextTypes.H4}
           />
         </LinearGradient>

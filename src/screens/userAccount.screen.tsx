@@ -452,7 +452,7 @@ const UserAccount = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.userDetailsContent}>
-          <TouchableOpacity style={styles.infoCard}>
+          {/* <TouchableOpacity style={styles.infoCard}>
             <CricantoText
               label="1993"
               type={CricantoTextTypes.H4}
@@ -463,7 +463,7 @@ const UserAccount = () => {
               type={CricantoTextTypes.BUTTON_LBL}
               style={styles.infoCardSubText}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={styles.infoCard}
             onPress={() => setEditAddressModal(true)}>
@@ -478,7 +478,7 @@ const UserAccount = () => {
               style={styles.infoCardSubText}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.infoCard}>
+          {/* <TouchableOpacity style={styles.infoCard}>
             <CricantoText
               label="22yo"
               type={CricantoTextTypes.H4}
@@ -489,7 +489,7 @@ const UserAccount = () => {
               type={CricantoTextTypes.BUTTON_LBL}
               style={styles.infoCardSubText}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <CricantoModal modalVisible={modalVisible}>{modalView()}</CricantoModal>
