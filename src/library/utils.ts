@@ -8,7 +8,9 @@ const getScaledNumber = (size: number = 0) => {
   const newSize = size * scale;
   const nearestPixel = PixelRatio.roundToNearestPixel(newSize);
 
-  if (Platform.OS === 'ios') return Math.round(nearestPixel);
+  if (Platform.OS === 'ios') {
+    return Math.round(nearestPixel);
+  }
 
   return Math.round(nearestPixel) - 2;
 };

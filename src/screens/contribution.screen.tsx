@@ -37,7 +37,7 @@ const Contribution = () => {
   );
   return (
     <CricantoHeader
-    enableHeader
+      enableHeader
       headerTitle="Contribution"
       backKey
       containerStyle={styles.container}>

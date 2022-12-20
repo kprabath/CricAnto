@@ -1,4 +1,4 @@
-import { put, takeEvery, call, all, select } from 'redux-saga/effects';
+import {put, takeEvery, call, all, select} from 'redux-saga/effects';
 import {
   USER_REGISTER,
   SEND_OTP,
@@ -9,12 +9,11 @@ import {
   UPDATE_USER_EMAIL,
   UPDATE_USER_TELEPHONE_NO,
   UPDATE_USER_ADDRESS,
-  UPDATE_USER_STATUS
-
+  UPDATE_USER_STATUS,
 } from '../common/constants';
 
 import UserAPi from '../apis/user.api';
-import { AuthReducers, Reducers } from '../types';
+import {AuthReducers, Reducers} from '../types';
 
 export type TSaga = {
   payload: any;
@@ -22,22 +21,22 @@ export type TSaga = {
   failed: (data?: any) => void;
 };
 
-export function* userRegister({ payload, success, failed }: TSaga) {
+export function* userRegister({payload, success, failed}: TSaga) {
   try {
-    const { data } = yield call(UserAPi.signUpAPI, payload);
-    yield put({ type: SET_AUTH_TOKEN, payload: data?.token });
-    yield put({ type: SET_USER_INFO, payload: data?.result });
+    const {data} = yield call(UserAPi.signUpAPI, payload);
+    yield put({type: SET_AUTH_TOKEN, payload: data?.token});
+    yield put({type: SET_USER_INFO, payload: data?.result});
     success(data.token);
   } catch (error) {
     failed(error);
   }
 }
 
-export function* sendOTP({ payload, failed }: TSaga) {
+export function* sendOTP({payload, failed}: TSaga) {
   try {
-    const { data } = yield call(UserAPi.sendOTPAPI, payload);
+    const {data} = yield call(UserAPi.sendOTPAPI, payload);
     if (data?.response?.acknowledged === true) {
-      yield put({ type: SET_USER_LOGIN, payload: true });
+      yield put({type: SET_USER_LOGIN, payload: true});
     }
     // success(data.message);
   } catch (error) {
@@ -45,12 +44,12 @@ export function* sendOTP({ payload, failed }: TSaga) {
   }
 }
 
-export function* userLogin({ payload, success, failed }: TSaga) {
+export function* userLogin({payload, success, failed}: TSaga) {
   try {
-    const { data } = yield call(UserAPi.logInAPI, payload);
+    const {data} = yield call(UserAPi.logInAPI, payload);
     yield all([
-      put({ type: SET_AUTH_TOKEN, payload: data?.token }),
-      put({ type: SET_USER_LOGIN, payload: true }),
+      put({type: SET_AUTH_TOKEN, payload: data?.token}),
+      put({type: SET_USER_LOGIN, payload: true}),
     ]);
     success(data.message);
   } catch (error) {
@@ -58,55 +57,64 @@ export function* userLogin({ payload, success, failed }: TSaga) {
   }
 }
 
-export function* userUpdateEmail({ payload, success, failed }: TSaga) {
+export function* userUpdateEmail({payload, success, failed}: TSaga) {
   try {
-    const { data } = yield call(UserAPi.updateUserEmailAPI, payload);
-    const existingUserInfo: AuthReducers['userInfo'] = yield select((state: Reducers) => state.auth.userInfo);
-    const newUserInfo = { ...existingUserInfo, email: payload.updatedEmail }
-    yield put({ type: SET_USER_INFO, payload: newUserInfo });
+    const {data} = yield call(UserAPi.updateUserEmailAPI, payload);
+    const existingUserInfo: AuthReducers['userInfo'] = yield select(
+      (state: Reducers) => state.auth.userInfo,
+    );
+    const newUserInfo = {...existingUserInfo, email: payload.updatedEmail};
+    yield put({type: SET_USER_INFO, payload: newUserInfo});
     success(data.message);
   } catch (error) {
     failed(error);
   }
 }
 
-export function* userUpdateTelephoneNo({ payload, success, failed }: TSaga) {
+export function* userUpdateTelephoneNo({payload, success, failed}: TSaga) {
   try {
-    const { data } = yield call(UserAPi.updateUserTelephoneNoAPI, payload);
-    const existingUserInfo: AuthReducers['userInfo'] = yield select((state: Reducers) => state.auth.userInfo);
-    const newUserInfo = { ...existingUserInfo, phoneNumber: payload.updatedPhoneNumber }
-    yield put({ type: SET_USER_INFO, payload: newUserInfo });
+    const {data} = yield call(UserAPi.updateUserTelephoneNoAPI, payload);
+    const existingUserInfo: AuthReducers['userInfo'] = yield select(
+      (state: Reducers) => state.auth.userInfo,
+    );
+    const newUserInfo = {
+      ...existingUserInfo,
+      phoneNumber: payload.updatedPhoneNumber,
+    };
+    yield put({type: SET_USER_INFO, payload: newUserInfo});
     success(data.message);
   } catch (error) {
     failed(error);
   }
 }
 
-export function* userUpdateAddress({ payload, success, failed }: TSaga) {
+export function* userUpdateAddress({payload, success, failed}: TSaga) {
   try {
-    const { data } = yield call(UserAPi.updateUserAddressAPI, payload);
-    const existingUserInfo: AuthReducers['userInfo'] = yield select((state: Reducers) => state.auth.userInfo);
-    const newUserInfo = { ...existingUserInfo, address: payload.updatedAddress }
-    yield put({ type: SET_USER_INFO, payload: newUserInfo });
+    const {data} = yield call(UserAPi.updateUserAddressAPI, payload);
+    const existingUserInfo: AuthReducers['userInfo'] = yield select(
+      (state: Reducers) => state.auth.userInfo,
+    );
+    const newUserInfo = {...existingUserInfo, address: payload.updatedAddress};
+    yield put({type: SET_USER_INFO, payload: newUserInfo});
     success(data.message);
   } catch (error) {
     failed(error);
   }
 }
 
-export function* userUpdateStatus({ payload, success, failed }: TSaga) {
+export function* userUpdateStatus({payload, success, failed}: TSaga) {
   try {
-    const { data } = yield call(UserAPi.updateUserStatusAPI, payload);
-    const existingUserInfo: AuthReducers['userInfo'] = yield select((state: Reducers) => state.auth.userInfo);
-    const newUserInfo = { ...existingUserInfo, Status: payload.updatedStatus }
-    yield put({ type: SET_USER_INFO, payload: newUserInfo });
+    const {data} = yield call(UserAPi.updateUserStatusAPI, payload);
+    const existingUserInfo: AuthReducers['userInfo'] = yield select(
+      (state: Reducers) => state.auth.userInfo,
+    );
+    const newUserInfo = {...existingUserInfo, Status: payload.updatedStatus};
+    yield put({type: SET_USER_INFO, payload: newUserInfo});
     success(data.message);
   } catch (error) {
     failed(error);
   }
 }
-
-
 
 function* userSaga() {
   yield takeEvery(USER_REGISTER, userRegister);

@@ -3,7 +3,6 @@ import {useSelector} from 'react-redux';
 import {StyleSheet, ActivityIndicator, View} from 'react-native';
 import {getScaledNumber} from '../library/utils';
 import colors from '../res/colors';
-//import LinearGradient from 'react-native-linear-gradient';
 
 const CricantoLoader = () => {
   const loading = useSelector(state => state?.common?.loading);

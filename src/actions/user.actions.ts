@@ -1,4 +1,12 @@
-import { USER_LOGIN, SEND_OTP, USER_REGISTER, UPDATE_USER_EMAIL, UPDATE_USER_TELEPHONE_NO, UPDATE_USER_ADDRESS,UPDATE_USER_STATUS } from '../common/constants';
+import {
+  USER_LOGIN,
+  SEND_OTP,
+  USER_REGISTER,
+  UPDATE_USER_EMAIL,
+  UPDATE_USER_TELEPHONE_NO,
+  UPDATE_USER_ADDRESS,
+  UPDATE_USER_STATUS,
+} from '../common/constants';
 
 export const userLogin = (
   payload: Object,

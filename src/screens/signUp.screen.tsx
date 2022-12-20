@@ -23,8 +23,10 @@ import Facebook from '../res/images/Facebook.svg';
 
 import {userRegister} from '../actions/user.actions';
 
-const SignUp = ({navigation}: {navigation: typeof useNavigation}) => {
+const SignUp = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   const [isSelected, setSelection] = useState(false);
   const [firstName, setFirstname] = useState(String);
   const [lastName, setLastname] = useState(String);

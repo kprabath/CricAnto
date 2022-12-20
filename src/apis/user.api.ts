@@ -1,7 +1,7 @@
 import Api from './api';
 
 export default class UserAPI {
-  static signUpAPI = data =>
+  static signUpAPI = (data: any) =>
     Api.request({
       method: 'post',
       action: 'register',
@@ -9,7 +9,7 @@ export default class UserAPI {
       data,
     });
 
-  static logInAPI = data =>
+  static logInAPI = (data: any) =>
     Api.request({
       method: 'post',
       action: 'login',
@@ -17,35 +17,35 @@ export default class UserAPI {
       data,
     });
 
-  static sendOTPAPI = data =>
+  static sendOTPAPI = (data: any) =>
     Api.request({
       method: 'post',
       action: 'register/verify',
       data,
     });
 
-  static updateUserEmailAPI = data =>
+  static updateUserEmailAPI = (data: any) =>
     Api.request({
       method: 'post',
       action: 'user/update/email',
       data,
     });
 
-  static updateUserTelephoneNoAPI = data =>
+  static updateUserTelephoneNoAPI = (data: any) =>
     Api.request({
       method: 'post',
       action: 'user/update/mobile_number',
       data,
     });
 
-  static updateUserAddressAPI = data =>
+  static updateUserAddressAPI = (data: any) =>
     Api.request({
       method: 'post',
       action: 'user/update/address',
       data,
     });
 
-  static updateUserStatusAPI = data =>
+  static updateUserStatusAPI = (data: any) =>
     Api.request({
       method: 'post',
       action: 'user/update/status',
