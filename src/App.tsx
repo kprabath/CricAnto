@@ -7,7 +7,6 @@
  *
  * @format
  */
-// import 'react-native-gesture-handler';
 import React from 'react';
 import {StatusBar, StyleSheet} from 'react-native';
 import AppRoutes from './navigation/appRoutes';
