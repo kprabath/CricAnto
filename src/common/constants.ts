@@ -36,6 +36,7 @@ export const END_LOADING = 'END_LOADING';
 // user actions
 export const USER_REGISTER = 'USER_REGISTER';
 export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGOUT = 'USER_LOGOUT';
 export const SEND_OTP = 'SEND_OTP';
 
 export const SET_USER_LOGIN = 'SET_USER_LOGIN';

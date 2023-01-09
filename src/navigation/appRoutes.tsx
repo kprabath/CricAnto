@@ -3,6 +3,7 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import Colors from '../res/colors';
 import SignUpScreen from '../screens/signUp.screen';
@@ -59,7 +60,6 @@ import {
   TOURNAMENTS_DETAIL_SCREEN,
   VIDEO_STREAM_SCREEN,
 } from '../common/constants';
-import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomeSideMenu from './customeSideMenu';
 
 import TabIcon1 from '../res/images/TabIcon1.svg';
@@ -67,7 +67,6 @@ import TabIcon2 from '../res/images/TabIcon2.svg';
 import TabIcon3 from '../res/images/TabIcon3.svg';
 import TabIcon4 from '../res/images/TabIcon4.svg';
 import TabIcon5 from '../res/images/TabIcon5.svg';
-import UserAccount from '../screens/userAccount.screen';
 import {useSelector} from 'react-redux';
 import {Reducers} from '../types';
 
@@ -132,13 +131,12 @@ const EventRoutes = () => {
   );
 };
 
-const DrawerNavigator = _ => {
+const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
       useLegacyImplementation={false}
       screenOptions={{
         headerStyle: {backgroundColor: Colors.white},
-        // headerTitle: 'Profile',
         headerShown: false,
       }}
       drawerContent={props => <CustomeSideMenu {...props} />}>
@@ -168,7 +166,7 @@ const DrawerNavigator = _ => {
     </Drawer.Navigator>
   );
 };
-const TabNavigator = _ => {
+const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -177,14 +175,18 @@ const TabNavigator = _ => {
       }}>
       <Tab.Screen
         options={{
-          tabBarIcon: () => <TabIcon2 />,
+          tabBarIcon: ({focused}) => {
+            return focused ? <TabIcon2 fill={'#0B2C83'} /> : <TabIcon2 />;
+          },
         }}
         name={HOME_SCREEN}
         component={HomeRoutes}
       />
       <Tab.Screen
         options={{
-          tabBarIcon: () => <TabIcon5 />,
+          tabBarIcon: ({focused}) => {
+            return focused ? <TabIcon5 fill={'#0B2C83'} /> : <TabIcon5 />;
+          },
         }}
         name={EVENTS_SCREEN}
         component={EventRoutes}
@@ -198,14 +200,18 @@ const TabNavigator = _ => {
       />
       <Tab.Screen
         options={{
-          tabBarIcon: () => <TabIcon4 />,
+          tabBarIcon: ({focused}) => {
+            return focused ? <TabIcon4 fill={'#0B2C83'} /> : <TabIcon4 />;
+          },
         }}
         name={SHOP_SCREEN}
         component={ShopScreen}
       />
       <Tab.Screen
         options={{
-          tabBarIcon: () => <TabIcon1 />,
+          tabBarIcon: ({focused}) => {
+            return focused ? <TabIcon1 fill={'#0B2C83'} /> : <TabIcon1 />;
+          },
         }}
         name={USER_PROFILE_ROUTES}
         component={UserProfileRoutes}
@@ -216,17 +222,19 @@ const TabNavigator = _ => {
 
 const AuthRoutes = (
   <>
+    <Stack.Screen name={LOGIN_SCREEN} component={LoginScreen} />
+
     <Stack.Screen
       options={{headerShown: false}}
       name={SIGN_UP_SCREEN}
       component={SignUpScreen}
     />
+
     <Stack.Screen
       options={{headerShown: false}}
       name={OTP_SCREEN}
       component={OTPScreen}
     />
-    <Stack.Screen name={LOGIN_SCREEN} component={LoginScreen} />
   </>
 );
 

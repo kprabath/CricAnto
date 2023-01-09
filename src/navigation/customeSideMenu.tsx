@@ -1,8 +1,16 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {SafeAreaView, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+
 import Colors from '../res/colors';
 import CricantoText from '../components/cricantoText';
-import {CricantoTextTypes} from '../enums';
 
 import Donate from '../res/images/Donate.svg';
 import Dot from '../res/images/Dot.svg';
@@ -17,8 +25,28 @@ import {
   MANAGE_SCREEN,
   USER_MANAGEMENT_SCREEN,
 } from '../common/constants';
+import {userLogout} from '../actions/user.actions';
 
 const CustomSidebarMenu = ({navigation}) => {
+  const dispatch = useDispatch();
+  const token = useSelector(state => state?.auth?.token);
+
+  const logout = () => {
+    dispatch(
+      userLogout(
+        {token},
+        message => {
+          Alert.alert('Success', message, [{text: 'OK', onPress: () => {}}]);
+        },
+        error => {
+          Alert.alert('Error', error.errorMessage, [
+            {text: 'OK', onPress: () => {}},
+          ]);
+        },
+      ),
+    );
+  };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
@@ -83,6 +111,11 @@ const CustomSidebarMenu = ({navigation}) => {
             label="Payment History"
             style={styles.subCategoryText}
           />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.subCategory} onPress={logout}>
+          <Dot />
+          <CricantoText label="Logout" style={styles.subCategoryText} />
         </TouchableOpacity>
       </View>
     </SafeAreaView>

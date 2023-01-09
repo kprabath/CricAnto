@@ -29,7 +29,9 @@ const Otp = ({navigation}) => {
   const {
     params: {userName, token},
   } = useRoute();
+
   const isButtonDisabled = verificationCode.length === 0;
+
   const register = () => {
     const data = {
       userName,

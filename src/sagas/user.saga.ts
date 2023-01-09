@@ -10,6 +10,9 @@ import {
   UPDATE_USER_TELEPHONE_NO,
   UPDATE_USER_ADDRESS,
   UPDATE_USER_STATUS,
+  UPDATE_FIRST_TIME,
+  USER_LOGOUT,
+  SET_AUTH_NULL,
 } from '../common/constants';
 
 import UserAPi from '../apis/user.api';
@@ -38,7 +41,6 @@ export function* sendOTP({payload, failed}: TSaga) {
     if (data?.response?.acknowledged === true) {
       yield put({type: SET_USER_LOGIN, payload: true});
     }
-    // success(data.message);
   } catch (error) {
     failed(error);
   }
@@ -49,10 +51,22 @@ export function* userLogin({payload, success, failed}: TSaga) {
     const {data} = yield call(UserAPi.logInAPI, payload);
     yield all([
       put({type: SET_AUTH_TOKEN, payload: data?.token}),
+      put({type: SET_USER_INFO, payload: data?.user}),
       put({type: SET_USER_LOGIN, payload: true}),
     ]);
     success(data.message);
   } catch (error) {
+    failed(error);
+  }
+}
+
+export function* userLogout({payload, success, failed}: TSaga) {
+  try {
+    const {data} = yield call(UserAPi.logOutAPI, payload);
+    yield put({type: SET_AUTH_NULL, payload: null});
+    success(data.message);
+  } catch (error) {
+    console.log('LOGOUT', error);
     failed(error);
   }
 }
@@ -119,6 +133,7 @@ export function* userUpdateStatus({payload, success, failed}: TSaga) {
 function* userSaga() {
   yield takeEvery(USER_REGISTER, userRegister);
   yield takeEvery(USER_LOGIN, userLogin);
+  yield takeEvery(USER_LOGOUT, userLogout);
   yield takeEvery(SEND_OTP, sendOTP);
   yield takeEvery(UPDATE_USER_EMAIL, userUpdateEmail);
   yield takeEvery(UPDATE_USER_TELEPHONE_NO, userUpdateTelephoneNo);

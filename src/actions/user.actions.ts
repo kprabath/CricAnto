@@ -1,5 +1,6 @@
 import {
   USER_LOGIN,
+  USER_LOGOUT,
   SEND_OTP,
   USER_REGISTER,
   UPDATE_USER_EMAIL,
@@ -14,6 +15,17 @@ export const userLogin = (
   failed: Function,
 ) => ({
   type: USER_LOGIN,
+  payload,
+  success,
+  failed,
+});
+
+export const userLogout = (
+  payload: Object,
+  success: Function,
+  failed: Function,
+) => ({
+  type: USER_LOGOUT,
   payload,
   success,
   failed,

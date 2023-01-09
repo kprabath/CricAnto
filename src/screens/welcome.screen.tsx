@@ -8,10 +8,11 @@ import {getScaledNumber} from '../library/utils';
 import {UPDATE_FIRST_TIME} from '../common/constants';
 
 import WelcomeLogo from '../res/images/Welcome.svg';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Welcome = () => {
   const dispatch = useDispatch();
+  const userData = useSelector(state => state?.auth?.userInfo);
 
   const gotoDashBoard = () => {
     dispatch({type: UPDATE_FIRST_TIME, payload: false});
@@ -22,7 +23,7 @@ const Welcome = () => {
       <View style={styles.logoContainer}>
         <WelcomeLogo />
         <CricantoText
-          label="Welcome James"
+          label={`Welcome ${userData.firstName}`}
           type={CricantoTextTypes.H3}
           style={styles.title}
         />

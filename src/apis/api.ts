@@ -2,7 +2,8 @@ import Axios, {AxiosRequestConfig} from 'axios';
 import {store} from '../store/store';
 import {startLoading, endLoading} from '../actions/common.action';
 
-const BASE_URL = 'https://cricanto-backend.herokuapp.com/';
+// const BASE_URL = 'https://cricanto-backend.herokuapp.com/';
+const BASE_URL = 'https://cricanto-backend-rff33.ondigitalocean.app/';
 
 interface IRequest {
   url?: string;
@@ -40,7 +41,7 @@ const request = ({
   params,
   action,
   method,
-  guest = false,
+  guest,
   // hideLoader = false,
   headers: addHeaders,
 }: IRequest) =>
@@ -58,7 +59,6 @@ const request = ({
       timeout: 30000,
       method: method || 'post',
       url: url || customUrl.url,
-      // cancelToken: AxiosCancelsource.token,
     };
 
     if (!guest) {
@@ -68,13 +68,13 @@ const request = ({
 
     Axios(axiosConfig)
       .then(response => {
-        console.log(action, data, response);
+        console.log('SUCCESS', action, data, response);
         resolve(response);
 
         store.dispatch(endLoading());
       })
       .catch(error => {
-        console.log(action, data, error);
+        console.log('ERROR>', guest, action, data, error);
         store.dispatch(endLoading());
         reject(error?.response?.data || error);
       });

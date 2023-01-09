@@ -22,7 +22,7 @@ import Google from '../res/images/Google.svg';
 import CricantoIcon from '../res/images/CricantoIcon.svg';
 import Facebook from '../res/images/Facebook.svg';
 
-const Login = ({navigation}) => {
+const Login = () => {
   const dispatch = useDispatch();
   const [isSelected, setSelection] = useState(false);
   const [password, setPassword] = useState(String);
@@ -42,7 +42,9 @@ const Login = ({navigation}) => {
           Alert.alert('Success', message, [{text: 'OK', onPress: () => {}}]);
         },
         error => {
-          Alert.alert('Error', error.errorMessage, [{text: 'OK', onPress: () => {}}]);
+          Alert.alert('Error', error.errorMessage, [
+            {text: 'OK', onPress: () => {}},
+          ]);
         },
       ),
     );

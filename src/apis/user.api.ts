@@ -17,6 +17,14 @@ export default class UserAPI {
       data,
     });
 
+  static logOutAPI = (data: any) =>
+    Api.request({
+      method: 'post',
+      action: 'logout',
+      guest: true,
+      data,
+    });
+
   static sendOTPAPI = (data: any) =>
     Api.request({
       method: 'post',
